@@ -1,0 +1,4 @@
+.logrow {
+    display: grid;
+    place-items: center;
+}

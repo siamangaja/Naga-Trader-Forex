@@ -108,7 +108,7 @@
                                 <div class="slide-text slide_style_left white_fonts">
                                     <h2 data-animation="animated">We Are Professional <br> With a Proven Track Record &amp; Excellence </h2>
                                     <a href="{{route('user.register')}}" class="btn btn-default active">Register</a>
-                                    <a href="login.php" class="btn btn-default">Login</a>
+                                    <a href="{{route('login')}}" class="btn btn-default">Login</a>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +131,9 @@
         </div>
     </section>
     <!-- end full slider parallax section -->
+    
     <br>
+
     <section class="" style="background: #fff;">
         <div class="container">
             <div class="row">
@@ -335,42 +337,61 @@
             </div>
             
             <div class="row">
-                <div id="myCarousel" class="carousel-slide">
 
-                 <ol class="carousel-indicators">
-                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                     <li data-target="#myCarousel" data-slide-to="1"></li>
-                     <li data-target="#myCarousel" data-slide-to="2"></li>
-                     <li data-target="#myCarousel" data-slide-to="3"></li>
-                     <li data-target="#myCarousel" data-slide-to="4"></li>
-                     <li data-target="#myCarousel" data-slide-to="5"></li>
-                 </ol>
-                 <div class="carousel-inner">
-                     <div class="item-active">
-                            <img src="img/img_testi.png" alt="CASHS" >
-                     </div>
-                     <div class="item">
-                            <img src="img/img_testi.png" alt="SWAROVSKI">
-                     </div>
-                     <div class="item">
-                            <img src="img/img_testi.png" alt="MARQUIS" >
-                     </div>
-                     <div class="item">
-                            <img src="img/img_testi.png" alt="ORREFORS" >
-                     </div>
-                     <div class="item">
-                            <img src="img/img_testi.png" alt="WATERFORD" >
-                     </div>
-                 </div>
-                 <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-                     <span class="glypicon glypicon-cheveron-left"></span>
-                 </a>
-                  <a class="arousel-control right" href="#myCarousel" data-slide="next">
-                     <span class="glypicon glypicon-cheveron-right"></span>
-                 </a>
+                <div class="full testmonial_slider">
+                <div class="carousel slide" data-ride="carousel" id="testi">
+                    <!-- Carousel Slides / Quotes -->
+                    <div class="carousel-inner text-center">
 
+                        <div class="item active">
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <div class="center">
+                                            <div class="client_img"><img class="img-responsive" src="img/img_testi.png" alt=""></div>
+                                        </div>
+                                        <p><span class="left_testmonial_qout"><i class="fa fa-quote-left"></i></span>{!! $Testimonial->content !!}<span class="right_testmonial_qout"><i class="fa fa-quote-right"></i></span>
+                                        </p>
+                                        <div class="center">
+                                            <p class="client_name">{{$Testimonial->name}}</p>
+                                        </div>
+                                        <div class="center">
+                                            <p class="country_name">{{$Testimonial->company}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
 
-             </div>
+                        @forelse ($Testimonials as $T)
+                        <div class="item">
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <div class="center">
+                                            <div class="client_img"><img class="img-responsive" src="img/img_testi.png" alt="#"></div>
+                                        </div>
+                                        <p><span class="left_testmonial_qout"><i class="fa fa-quote-left"></i></span>{!! $T->content !!}<span class="right_testmonial_qout"><i class="fa fa-quote-right"></i></span>
+                                        </p>
+                                        <div class="center">
+                                            <p class="client_name">{{$T->name}}</p>
+                                        </div>
+                                        <div class="center">
+                                            <p class="country_name">{{$T->company}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
+                        @empty
+                        @endforelse
+
+                    </div>
+
+                    <a data-slide="prev" href="#testi" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
+                    <a data-slide="next" href="#testi" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
 
             </div>
 
@@ -426,12 +447,11 @@
             
             <div class="col-md-4">
                 <div class="main-heading left_text">
-                    <h2>Quick links</h2>
+                    <h2>Quick Links</h2>
                 </div>
                 <ul class="footer-menu" style="width:50%;">
                     <li><a href="{{route('frontpage')}}"><i class="fa fa-angle-right"></i> Home</a></li>
                     <li><a href="{{url('about')}}"><i class="fa fa-angle-right"></i> About</a></li>
-                    <li><a href="{{url('about')}}"><i class="fa fa-angle-right"></i> Plans</a></li>
                     <li><a href="{{url('about')}}"><i class="fa fa-angle-right"></i> Reviews</a></li>
                 </ul>
                 <ul class="footer-menu" style="width:50%;">
@@ -444,10 +464,11 @@
             
             <div class="col-md-4">
                 <div class="main-heading left_text">
-                    <h2>Contact us</h2>
+                    <h2>Contact Us</h2>
                 </div>
                <p>
                     {{opsi('website')}}<br>
+                    Petaling Jaya Selangor, Malaysia<br>
                     Phone: +60 11 1289 8940<br>
                     WhatsApp: +60 11 1289 8940<br>
                     Email: <a href="emailto:nagatrederforexmalaysia@gmail.com">nagatrederforexmalaysia@gmail.com</a>
@@ -460,14 +481,6 @@
 
 <script src="{{ asset('js/js_jquery.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
-
-<script type="text/javascript">
-     //starts the carousel
-     $document.ready(function () {
-         $('#myCarousel').carousel();
-     });
-</script>
-
 
 <script>
     (function(b, i, t, C, O, I, N) {

@@ -1,39 +1,43 @@
 @extends('layouts.app')
 @section('title', $title)
-
 @section('content')
 
-    <!-- page title -->
-    <section class="section section--first section--bg" data-bg="img/section/section-bg.jpg">
-        <div class="container">
-            <div class="row">
-                <!-- section title -->
-                <div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-                    <h2 class="section__title section__title--white">{{$title}}</h2>
-                </div>
-                <!-- end section title -->
-            </div>
-        </div>
-    </section>
-    <!-- end page title -->
-
-    <!-- static page -->
-    <section class="section section--border-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-xl-10 offset-xl-1">
-                    <div class="article">
-                        <!-- article content -->
-                        <div class="article__content">
-                            <h1>{{$title}}</h1>
-                            <p>{!! $data !!}</p>
-                        </div>
-                        <!-- end article content -->
+<section id="inner_page_infor" class="innerpage_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="full">
+                    <div class="inner_page_info">
+                        <h3>About Us</h3>
+                        <ul>
+                            <li><a href="{{route('frontpage')}}">Home</a></li>
+                            <li><i class="fa fa-angle-right"></i></li>
+                            <li><a href="{{url('about')}}">About Us</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- end static page -->
+    </div>
+</section>
+
+<section class="layout_padding_2" style="background: #fff;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="full">
+                    <h2 class="heading_style2">{{$title}}</h2>
+                    {!! $data !!}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style type="text/css">
+    p {
+        text-align: inherit !important;
+    }
+</style>
 
 @stop

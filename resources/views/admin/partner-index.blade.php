@@ -65,7 +65,7 @@
                         @forelse ($data as $d)
                         <tr>
                             <td>{{ $d->title }}</td>
-                            <td><img src="storage/images/{{ $d->image }}" width="170"></td>
+                            <td><img src="storage/images/{{ $d->image }}" width="150"></td>
                             <td>{{ $d->link }}</td>
                             <td>
                                 <a href="admin/partner/{{$d->id}}/edit"><span class="btn btn-dark btn-sm"><i class="fa fa-file"></i> Edit</span></a> <a href="admin/partner/{{$d->id}}/delete" onclick="return confirm('Are you sure to delete?')"><span class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Del</span></a>

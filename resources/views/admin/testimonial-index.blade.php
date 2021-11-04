@@ -53,6 +53,7 @@
                     <!--begin::Head-->
                     <thead class="fs-7 text-gray-400 text-uppercase">
                         <tr>
+                            <th class="min-w-50px">Image</th>
                             <th class="min-w-50px">Name</th>
                             <th class="min-w-50px">Company</th>
                             <th class="min-w-100px">Content</th>
@@ -64,7 +65,8 @@
                     <tbody class="fs-6">
                         @forelse ($data as $d)
                         <tr>
-                            <td>{{ $d->name }}</td>
+                            <td><img src="storage/images/{{ $d->image }}" width="70"></td>
+                             <td>{{ $d->name }}</td>
                             <td>{{ $d->company }}</td>
                             <td><small>{!! Str::limit( strip_tags( $d->content ), 150 ) !!}</small></td>
                             <td>

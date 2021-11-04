@@ -20,11 +20,11 @@ class PagesController extends Controller
 
     public function frontpage () {
         $Features = Features::orderBy('id', 'desc')->get();
-        $Prices = Prices::orderBy('id', 'desc')->get();
+        $Prices = Prices::orderBy('id', 'asc')->get();
         $Testimonial = Testimonials::first();
         $Testimonials = Testimonials::orderBy('id', 'asc')->skip(1)->take(10)->get();
         $Partners = Partners::orderBy('id', 'desc')->get();
-        return view('frontpage-alt', [
+        return view('frontpage', [
             'title'         => 'Home',
             'Services'      => $Features,
             'Testimonial'   => $Testimonial,

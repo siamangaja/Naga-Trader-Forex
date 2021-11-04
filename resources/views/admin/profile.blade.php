@@ -62,19 +62,6 @@
                     <!--end::Col-->
                 </div>
                 <!--end::Input group-->
-                <div class="row mb-6">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label fw-bold fs-6">
-                        <span>Phone</span>
-                    </label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8 fv-row">
-                        <input type="text" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone" value="{{ $d->phone }}" />
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
             </div>
             <!--end::Card body-->
             <!--begin::Actions-->

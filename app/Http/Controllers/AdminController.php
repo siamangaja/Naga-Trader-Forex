@@ -298,7 +298,17 @@ class AdminController extends Controller
     }
 
     public function testimonialsStore (Request $request) {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
+        ]);
+        $file = $request->file('image');
+        $imageName1 = time().'-'.$file->getClientOriginalName();
+        $imageName2 = Str::lower($imageName1);
+        $imageName3 = preg_replace('/\s+/', '', $imageName2);
+        $img = $request->image->move(public_path('storage/images'), $imageName3);
+
         $Testimonials = new Testimonials;
+        $Testimonials->image    = $imageName3;
         $Testimonials->name     = $request->name;
         $Testimonials->company  = $request->company;
         $Testimonials->content  = $request->content;

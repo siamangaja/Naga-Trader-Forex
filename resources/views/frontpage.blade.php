@@ -1,356 +1,368 @@
 @extends('layouts.app')
 @section('title', $title)
-
 @section('content')
 
-    <!-- home -->
-    <section class="home home--circle">
-        <!-- particles -->
-        <div id="particles-js" class="home__particles"></div>
-        <!-- end particles -->
+    <section id="full_slider" class="full_slider_inner padding_0">
+        <div class="main_slider">
+            <div id="next" class="carousel bs-slider slide  control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000">
+                <!-- Wrapper For Slides -->
+                <div class="carousel-inner" role="listbox">
 
+                    <div class="item active">
+                        <img src="img/bg_slider_02.webp" alt="" class="slide-image" />
+                        <div class="container">
+                            <div class="row">
+                                <div class="slide-text slide_style_left white_fonts">
+                                    <h2 data-animation="animated">Join The World's <br>Highest Performing <span style="color: #e9d16f;">Crypto</span> <br>Investment Company.</h2>
+                                    <a href="{{route('user.register')}}" class="btn btn-default active">Get Started</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img src="img/bg_slider_01.webp" alt="" class="slide-image" />
+                        <div class="container">
+                            <div class="row">
+                                <div class="slide-text slide_style_left white_fonts">
+                                    <h2 data-animation="animated">We Are Professional <br> With a Proven Track Record &amp; Excellence </h2>
+                                    <a href="{{route('user.register')}}" class="btn btn-default active">Register</a>
+                                    <a href="{{route('login')}}" class="btn btn-default">Login</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End of Wrapper For Slides -->
+                <!-- Left Control -->
+                <a class="left carousel-control" href="#next" role="button" data-slide="prev">
+                    <span class="fa fa-angle-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <!-- Right Control -->
+                <a class="right carousel-control" href="#next" role="button" data-slide="next">
+                    <span class="fa fa-angle-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <!-- End  bootstrap-touch-slider Slider -->
+        </div>
+    </section>
+    <!-- end full slider parallax section -->
+    
+    <br>
+
+    <section class="" style="background: #fff;">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-5 offset-xl-0">
-                    <div class="home__content">
-                        <h1 class="home__title">Start Bitcoin mining today!</h1>
-                        <p class="home__text">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text.</p>
-                        <a href="{{route('user.register')}}" class="btn btn--shadow">get started</a>
-                    </div>
-                </div>
-
-                <div class="col-xl-5 offset-xl-1">
-                    <div class="home__content home__content--desk">
-                        <div class="servers">
-                            <div class="servers__title">Server status</div>
-                            <div class="servers__item servers__item--green" title="Online">
-                                Europe - Amsterdam
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="full">
+                        <div class="col-md-5 col-xs-12 pull-right">
+                            <div class="full">
+                                <div class="banner_icon">
+                                    <img class="img-responsive" src="img/img_wallet.png" alt="" />
+                                </div>
                             </div>
-                            <div class="servers__item servers__item--green" title="Online">
-                                China - Hong Kong
-                            </div>
-                            <div class="servers__item servers__item--yellow" title="Unstable">
-                                India - Chennai
-                            </div>
-                            <div class="servers__item servers__item--green" title="Online">
-                                USA - San Jose
-                            </div>
-                            <div class="servers__item servers__item--green" title="Online">
-                                Japan - Tokyo
-                            </div>
-                            <div class="servers__item servers__item--red" title="Offlane">
-                                Brazil - Sao Paulo
+                        </div>
+                        <div class="col-md-7 col-xs-12">
+                            <div class="full" style="margin-top:30px;">
+                                <h2 class="heading_style2">Build Up Your Crypto Portfolio.</h2>
+                                <p class="left_text" style="font-size: 18px;">Btc-Finance.org is a crypto currency investment company created by a group of blockchain and crypto enthusiasts for an amazing community that keeps growing so that everyone regardless of your investment size, technical background or experience in cryptocurrencies will gain from the earnings that comes with crypto investment. We offer you the most profitable and reliable crypto investment contracts by providing daily payouts on all investment packages.</p>
+                                <div class="">
+                                    <a class="btn main_btn" href="{{route('user.register')}}">open account</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <a href="#services" data-scroll class="home__btn">
-            <i class="ti-angle-double-down"></i>
-        </a>
     </section>
-    <!-- end home -->
+    <br>
 
-    <!-- services -->
-    <section class="section" id="services">
+    <!-- section -->
+    <section class="padding_0 info_coins">
         <div class="container">
             <div class="row">
-                <!-- section title -->
-                <div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-                    <h2 class="section__title">Our Services</h2>
-                    <p class="section__text">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                </div>
-                <!-- end section title -->
-            </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="full">
+                        <h2 style="display:none;">heading</h2>
+                        <div class="coin_formation">
+                            <ul>
+                                 <li>
+                                    <span class="curr_name">AMOUNT PROCESSED</span>
+                                    <span class="curr_price">$075M</span>
+                                 </li>
 
-            <div class="row">
-                 @forelse ($Services as $s)
-                <div class="col-12 col-md-6 col-xl-3">
-                    <!-- service -->
-                    <div class="service">
-                        {!! $s->icon !!}
-                        <h3 class="service__title">{{$s->title}}</h3>
-                        {!! $s->content !!}
+                                 <li>
+                                    <span class="curr_name">Active Clients</span>
+                                    <span class="curr_price">6636</span>
+                                 </li>
+
+                                 <li>
+                                    <span class="curr_name">24Hr Avg. Payout</span>
+                                    <span class="curr_price">08114 USD</span>
+                                 </li>
+
+                                 <li>
+                                    <span class="curr_name">24Hr Avg. Investments</span>
+                                    <span class="curr_price">80912 USD</span>
+                                 </li>
+                            </ul>
+                        </div>
                     </div>
-                    <!-- end service -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end section -->
+    
+    <!-- section -->
+    <section class="layout_padding dark_bg" id="plans">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="full">
+                        <div class="heading_main">
+                            <h2><span>Investment Plans</span></h2>
+                            <p>Select an investment plan to get started</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @forelse ($Prices as $p)
+                <div class="col-md-4">
+                    <div class="full">
+                        <div class="coin_selling_bt">
+                            <ul>
+                                <li><a class="active" href="{{ $p->button }}">{{$p->title}}</a></li>
+                            </ul>
+                            <div class="coin_price_table" style="float:none !important;">
+                                <h3 style="font-size: 50px;">{{ $p->price }}</h3>
+                                <h3>{{ $p->notes }}</h3>
+                                    {!! $p->content !!}
+                                <div class="center">
+                                    <a class="pay_btn" href="{{ $p->button }}">Select Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 @empty
                 @endforelse
             </div>
-
         </div>
     </section>
-    <!-- end services -->
-
-    <!-- video -->
-    <div class="section section--bg" data-bg="img/section/section-bg2.jpg">
+    <!-- end section -->
+    
+    <br>
+    
+    <section class="">
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <!-- section title -->
-                    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-                        <a class="section__video" href="https://www.youtube.com/watch?v=Pl8OlkkwRpc"><i class="ti-control-play"></i></a>
-                        <h2 class="section__title section__title--white">Why Choose Us?</h2>
-                        <p class="section__text section__text--white">Check out our mining farm setup. To bring you the best we must hire the best.</p>
-                    </div>
-                    <!-- end section title -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end video -->
-
-    <!-- currencies -->
-    <section class="section">
-        <div class="container">
-            <div class="row">
-                <!-- section title -->
-                <div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-                    <h2 class="section__title">Supported Currencies</h2>
-                    <p class="section__text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                </div>
-                <!-- end section title -->
-            </div>
-
-            <div class="row">
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc BTC currenc__icon"></i>
-                        <span class="currenc__name">Bitcoin</span>
-                        <span class="currenc__hash">43.1 PH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc ETC-alt currenc__icon"></i>
-                        <span class="currenc__name">Ethereum Classic</span>
-                        <span class="currenc__hash">20.0 GH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc ETH currenc__icon"></i>
-                        <span class="currenc__name">Ethereum</span>
-                        <span class="currenc__hash">120.1 GH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc START currenc__icon"></i>
-                        <span class="currenc__name">Startcoin</span>
-                        <span class="currenc__hash">28.6 kH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc LTC currenc__icon"></i>
-                        <span class="currenc__name">Litecoin</span>
-                        <span class="currenc__hash">2.7 GH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc XMR currenc__icon"></i>
-                        <span class="currenc__name">Monero</span>
-                        <span class="currenc__hash">44.6 MH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc VTC currenc__icon"></i>
-                        <span class="currenc__name">Vertcoin</span>
-                        <span class="currenc__hash">1.6 MH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc IFC currenc__icon"></i>
-                        <span class="currenc__name">Infinitecoin</span>
-                        <span class="currenc__hash">184.1 kH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc SLS currenc__icon"></i>
-                        <span class="currenc__name">Salus</span>
-                        <span class="currenc__hash">6.2 MH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc XPM currenc__icon"></i>
-                        <span class="currenc__name">PrimeCoin</span>
-                        <span class="currenc__hash">12.1 MH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc DASH currenc__icon"></i>
-                        <span class="currenc__name">Dash</span>
-                        <span class="currenc__hash">198.8 kH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc SDC currenc__icon"></i>
-                        <span class="currenc__name">Shadow</span>
-                        <span class="currenc__hash">13.5 MH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-12">
-                    <a href="{{route('user.register')}}" class="btn btn--center btn--section btn--shadow">get started</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- end currencies -->
-
-    <!-- testimonials -->
-    <section class="section section--blue">
-        <div class="container">
-            <div class="row">
-                <!-- section title -->
-                <div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-                    <h2 class="section__title">Client Testimonials</h2>
-                    <p class="section__text">What 100% real people say about us</p>
-                </div>
-                <!-- end section title -->
-            </div>
-        </div>
-        <!-- testimonials slider -->
-        <div class="owl-carousel testimonial-slider testimonial-slider--blue">
-            @forelse ($Testimonials as $d)
-            <div class="testimonial">
-                <div class="testimonial__text">
-                    {!! $d->content !!}
-                </div>
-                <div class="testimonial__client">
-                    <img src="img/users/user1.jpg" alt="">
-                    <p>{{$d->name}}</p>
-                    <span>{{$d->company}}</span>
-                </div>
-            </div>
-            @empty
-            @endforelse
-        </div>
-        <!-- end testimonials slider -->
-    </section>
-    <!-- end testimonials -->
-
-    <!-- pricing -->
-    <section class="section section--border-bottom">
-        <div class="container">
-            <div class="row">
-                <!-- section title -->
-                <div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-                    <h2 class="section__title">Pricing</h2>
-                    <p class="section__text">Various versions have evolved over the years, sometimes by accident, sometimes on purpose.</p>
-                </div>
-                <!-- end section title -->
-            </div>
-
-            <div class="row">
-                <div class="col-12 col-lg-10 offset-lg-1 col-xl-12 offset-xl-0">
-                    <div class="price-wrap">
-                        
-                        @forelse ($Prices as $p)
-                        <!-- price -->
-                        <div class="price">
-                            <h3 class="price__title">{{$p->title}}</h3>
-                            <p>{!! $p->content !!}</p>
-                            <span class="price__value">{{$p->price}}</span>
-                            <p class="price__text">{{$p->notes}}</p>
-                            <a href="{{$p->button}}"><button class="btn btn--border btn--center" type="button">Start Now</button></a>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="full">
+                        <div class="heading_main">
+                            <h2><span>Why Choose Us?</span></h2>
                         </div>
-                        <!-- end price -->
+                    </div>
+                </div>
+            </div>
+            <div class="row service_main">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="full service_section">
+                        @forelse ($Services as $f)
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <div class="center">
+                                <img src="img/startup.png" width="50px" height="50px">
+                            </div>
+                            <div class="center">
+                                <h3>{{$f->title}}</h3>
+                            </div>
+                            <p>{!! $f->content !!}</p>
+                        </div>
                         @empty
                         @endforelse
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- section -->
+    <section class="layout_padding_2 dark_bg white_fonts">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="full">
+
+                        <div class="col-md-7 col-xs-12">
+                            <div class="full">
+                                <h2 class="heading_style2">Invest with confidence on the most trusted investment platform</h2>
+                                <p class="left_text" style="font-size: 18px;">Earning the trust of our clients has always been our highest priority. We earn that trust through the best security in the business — most of our digital assets are held safely in cold wallets so bad actors can't reach it.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 col-xs-12">
+                            <div class="full">
+                                <div class="btcwdgt-chart" bw-noshadow="true"></div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- end pricing -->
+    <!-- end section -->
 
-    <!-- get started -->
-    <section class="section">
-        <div class="container">
+    <section style="background-image:url(img/bg_front_01.jpg); background-repeat: no-repeat; background-size: cover;">
+        <container>
             <div class="row">
-                <div class="col-12 col-lg-12">
-                    <!-- get started -->
-                    <div class="get-started">
-                        <h3 class="get-started__title">Create Account</h3>
-                        <p class="get-started__text">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
-                        <a href="{{route('user.register')}}" class="btn">get started</a>
+
+                <div class="col-md-12">
+                    <br>
+                    <br>
+                    <center>
+                        <h1 style="color: #fff; font-weight: bold; font-size: 30px;">Recent Transactions</h1>
+                        <br>
+                        <iframe src="https://www.btcwidget.info/widget/liveTx/%23000000/%23000000/%23000000/%23ffffff/%23000000/1000/500/10" width="1000" height="500" frameBorder="0" scrolling="no"></iframe>
+                    </center>
+                    <br>
+
+                </div>
+
+            </div>
+        </container>
+    </section>
+
+    <br>
+
+    <!-- section -->
+    <section class="" id="reviews">
+        <div class="container">
+           
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="full">
+                        <div class="heading_main">
+                            <h2><span>Reviews</span></h2>
+                            <p>Hear from our amazing community</p>
+                        </div>
                     </div>
-                    <!-- end get started -->
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- end get started -->
-
-    <!-- partners -->
-    <div class="partners section--border-top section--border-bottom">
-        <div class="container">
+            
             <div class="row">
-                <div class="col-12">
-                    <!-- partners slider -->
-                    <div class="owl-carousel partners__slider">
-                        @forelse ($Partners as $p)
-                        <!-- slider item -->
+
+                <div class="full testmonial_slider">
+                <div class="carousel slide" data-ride="carousel" id="testi">
+                    <!-- Carousel Slides / Quotes -->
+                    <div class="carousel-inner text-center">
+
+                        <div class="item active">
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <div class="center">
+                                            <div class="client_img"><img class="img-responsive" src="storage/images/{{ $Testimonial->image }}" alt=""></div>
+                                        </div>
+                                        <p><span class="left_testmonial_qout"><i class="fa fa-quote-left"></i></span>{!! $Testimonial->content !!}<span class="right_testmonial_qout"><i class="fa fa-quote-right"></i></span>
+                                        </p>
+                                        <div class="center">
+                                            <p class="client_name">{{$Testimonial->name}}</p>
+                                        </div>
+                                        <div class="center">
+                                            <p class="country_name">{{$Testimonial->company}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
+
+                        @forelse ($Testimonials as $T)
                         <div class="item">
-                            <a href="#">
-                                <a href="{{$p->link}}" target="_blank"><img src="/storage/images/{{$p->image}}" alt="{{$p->title}}" title="{{$p->title}}"></a>
-                            </a>
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <div class="center">
+                                            <div class="client_img"><img class="img-responsive" src="storage/images/{{ $T->image }}" alt="#"></div>
+                                        </div>
+                                        <p><span class="left_testmonial_qout"><i class="fa fa-quote-left"></i></span>{!! $T->content !!}<span class="right_testmonial_qout"><i class="fa fa-quote-right"></i></span>
+                                        </p>
+                                        <div class="center">
+                                            <p class="client_name">{{$T->name}}</p>
+                                        </div>
+                                        <div class="center">
+                                            <p class="country_name">{{$T->company}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </blockquote>
                         </div>
-                        <!-- end slider item -->
                         @empty
                         @endforelse
+
                     </div>
-                    <!-- end partners slider -->
+
+                    <a data-slide="prev" href="#testi" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
+                    <a data-slide="next" href="#testi" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- end section -->
+
+    <section class=" dark_bg white_fonts">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="full">
+
+                        <div class="col-md-12">
+                            <div class="full" style="margin-top:12px;">
+                                <h2 class="heading_style2" style="text-align: center;">Earn Extra 10% With Our Amazing Referral Program</h2>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- section -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="full">
+                <ul class="brand-list">
+                    @forelse ($Partners as $p)
+                        <li>
+                            <a href="{{$p->link}}" target="_blank"><img src="/storage/images/{{$p->image}}" alt="{{$p->title}}" title="{{$p->title}}" width="120"></a>
+                        </li>
+                    @empty
+                    @endforelse
+                </ul>
             </div>
         </div>
     </div>
-    <!-- end partners -->
+    <!-- end section -->
+
+    <script>
+        (function(b, i, t, C, O, I, N) {
+            window.addEventListener('load', function() {
+                if (b.getElementById(C)) return;
+                I = b.createElement(i), N = b.getElementsByTagName(i)[0];
+                I.src = t;
+                I.id = C;
+                N.parentNode.insertBefore(I, N);
+            }, false)
+        })(document, 'script', 'https://widgets.bitcoin.com/widget.js', 'btcwdgt');
+    </script>
 
 @stop

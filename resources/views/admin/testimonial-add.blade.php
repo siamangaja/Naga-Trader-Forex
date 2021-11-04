@@ -40,6 +40,19 @@
                 <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-4 col-form-label fw-bold fs-6">
+                        <span class="required">Image</span>
+                    </label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="file" name="image" class="form-control form-control-lg form-control-solid" required/>
+                    </div>
+                    <!--end::Col-->
+                </div>
+
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">
                         <span class="required">Name</span>
                     </label>
                     <!--end::Label-->

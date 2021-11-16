@@ -8,11 +8,11 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="full">
                     <div class="inner_page_info">
-                        <h3>About Us</h3>
+                        <h3>{{$title}}</h3>
                         <ul>
                             <li><a href="{{route('frontpage')}}">Home</a></li>
                             <li><i class="fa fa-angle-right"></i></li>
-                            <li><a href="{{url('about')}}">About Us</a></li>
+                            <li><a href="{{url()->current()}}">{{$title}}</a></li>
                         </ul>
                     </div>
                 </div>

@@ -40,7 +40,7 @@ class UserLoginController extends Controller
           return redirect()->back()->with("error","Akun Anda diblokir...");
         }
 
-        return redirect()->intended(route('frontpage'));
+        return redirect()->route('user.dashboard');
       }
       return redirect()->back()->withInput($request->only('email', 'remember'))->with("error","Email atau password salah...");
     }

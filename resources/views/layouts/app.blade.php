@@ -9,6 +9,7 @@
     <meta name="keywords" content="" />
     <meta name="referrer" content="strict-origin" />
     <title>{{$title}} - {{opsi('website')}}</title>
+    <link rel="shortcut icon" href="storage/images/favicon.ico" />
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}" />

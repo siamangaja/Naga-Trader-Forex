@@ -71,7 +71,7 @@ class PagesController extends Controller
         $datanotif = [
             'name'      => $request->name,
             'email'     => $request->email,
-            'msg'       => $request->message,
+            'msg'       => $request->msg,
             'subject'   => 'Form kontak website dari: '.$request->name
         ];
         $SentMail = Mail::send('email-contact', $datanotif, function($message) use ($datanotif)

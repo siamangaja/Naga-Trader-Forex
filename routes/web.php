@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\DepositController;
 
 Route::get('/', [PagesController::class,'frontpage'])->name('frontpage');
 
@@ -61,7 +61,6 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/partner/{id}/edit', [AdminController::class,'partnersEdit'])->name('partner.edit');
     Route::post('/admin/partner/{id}/edit', [AdminController::class,'partnersUpdate'])->name('partner.update');
     Route::get('/admin/partner/{id}/delete', [AdminController::class,'partnersDelete'])->name('partner.delete');
-
     Route::get('/admin/options', [AdminController::class,'optionsIndex'])->name('options.index');
     Route::get('/admin/options/{id}/edit', [AdminController::class,'optionsEdit'])->name('options.edit');
     Route::post('/admin/options/{id}/edit', [AdminController::class,'optionsUpdate'])->name('options.update');
@@ -69,7 +68,22 @@ Route::group(['middleware' => ['auth:admin']], function () {
 
 // User
 Route::group(['middleware' => ['auth:user']], function () {
-    Route::get('/home', [UserController::class,'index'])->name('user.dashboard');
+    Route::get('/user', [DepositController::class,'dashboardUser'])->name('user.dashboard');
+    Route::get('/user/profile', [DepositController::class,'profileUser'])->name('user.profile');
+    Route::post('/user/profile', [DepositController::class,'saveprofileUser']);
+    Route::get('/user/change-password', [DepositController::class,'ChangePassword'])->name('user.change-password');
+    Route::post('/user/change-password', [DepositController::class,'SavePassword']);
+    Route::get('/user/deposit', [DepositController::class,'depositUser'])->name('user.deposit');
+    Route::get('/user/deposit/add', [DepositController::class,'depositAdd'])->name('user.deposit');
+    Route::post('/user/deposit/add', [DepositController::class,'depositStore']);
+    Route::get('/user/deposit/{ref}', [DepositController::class,'depositDetail']);
+    Route::get('/user/withdraw', [DepositController::class,'withdrawUser'])->name('user.withdraw');
+    Route::get('/user/withdraw/add', [DepositController::class,'WithdrawAdd']);
+    Route::post('/user/withdraw/add', [DepositController::class,'WithdrawStore']);
+    Route::get('/user/bank', [DepositController::class,'ChangeBank'])->name('user.bank');
+    Route::post('/user/bank/save', [DepositController::class,'SaveBank']);
+    Route::post('/user/bank/store', [DepositController::class,'StoreBank']);
+    Route::get('/user/wallet', [DepositController::class,'WalletUser'])->name('user.wallet');
 });
 
 Route::get('/login', [UserLoginController::class,'showLoginForm'])->name('login');

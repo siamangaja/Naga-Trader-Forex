@@ -24,6 +24,7 @@
     <!--end::Head-->
     <!--begin::Body-->
     <body id="kt_body" class="header-tablet-and-mobile-fixed aside-enabled">
+
         <!--begin::Main-->
         <!--begin::Root-->
         <div class="d-flex flex-column flex-root">
@@ -33,12 +34,20 @@
                 <div id="kt_aside" class="aside" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
                     <!--begin::Aside menu-->
                     <div class="aside-menu flex-column-fluid">
-                        @include('includes.sidebar')
+                        @if (Auth::guard('admin')->check())
+                            @include('includes.sidebar-admin')
+                        @else
+                            @include('includes.sidebar-user')
+                        @endif
                     </div>
                     <!--end::Aside menu-->
                     <!--begin::Footer-->
                     <div class="aside-footer flex-column-auto py-5" id="kt_aside_footer">
-                        <a href="/admin/logout" class="btn btn-custom btn-primary w-100" title="Log Out">
+                        @if (Auth::guard('admin')->check())
+                            <a href="admin/logout" class="btn btn-custom btn-primary w-100" title="Log Out">
+                        @else
+                            <a href="logout" class="btn btn-custom btn-primary w-100" title="Log Out">
+                        @endif
                             <span class="btn-label">Log Out</span>
                             <!--begin::Svg Icon | path: icons/duotune/general/gen005.svg-->
                             <span class="svg-icon btn-icon svg-icon-2">
@@ -114,7 +123,11 @@
                                     <!--begin::Breadcrumb-->
                                     <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 pt-1">
                                         <li class="breadcrumb-item text-muted">
-                                            <a href="admin" class="text-muted text-hover-primary">Home</a>
+                                            @if (Auth::guard('admin')->check())
+                                                <a href="admin" class="text-muted text-hover-primary">Home</a>
+                                            @else
+                                                <a href="user" class="text-muted text-hover-primary">Home</a>
+                                            @endif
                                         </li>
                                         <li class="breadcrumb-item">
                                             <span class="bullet bg-gray-200 w-5px h-2px"></span>

@@ -9,6 +9,9 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DepositController;
 
+
+Route::get('/btc', [PagesController::class,'BTC'])->name('BTC');
+
 Route::get('/', [PagesController::class,'frontpage'])->name('frontpage');
 
 Route::get('/admin/login', [AdminAuthController::class,'getLogin'])->name('login-admin');

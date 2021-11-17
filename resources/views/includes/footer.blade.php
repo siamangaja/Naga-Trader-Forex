@@ -15,8 +15,8 @@
                 </div>
                 <ul class="footer-menu" style="width:50%;">
                     <li><a href="{{route('frontpage')}}"><i class="fa fa-angle-right"></i> Home</a></li>
-                    <li><a href="{{url('about')}}"><i class="fa fa-angle-right"></i> About</a></li>
-                    <li><a href="{{url('about')}}"><i class="fa fa-angle-right"></i> Reviews</a></li>
+                    <li><a href="{{url('about')}}"><i class="fa fa-angle-right"></i> About Us</a></li>
+                    <li><a href="{{url('terms')}}"><i class="fa fa-angle-right"></i> Terms</a></li>
                 </ul>
                 <ul class="footer-menu" style="width:50%;">
                     <li><a href="{{route('user.register')}}"><i class="fa fa-angle-right"></i> Register</a></li>
@@ -31,7 +31,6 @@
                     <h2>Contact Us</h2>
                 </div>
                <p>
-                    {{opsi('website')}}<br>
                     Petaling Jaya Selangor, Malaysia<br>
                     Phone: {{opsi('phone')}}<br>
                     WhatsApp:{{opsi('phone')}}<br>

@@ -253,7 +253,7 @@ class DepositController extends Controller
 
     public function WalletUser() {
         $uid = auth()->id();
-        $title = 'Logs History';
+        $title = 'Wallet';
         $databalance = Wallet::orderBy('id', 'desc')->where('user_id', $uid)->take(1)->get();
         $data = Wallet::orderBy('id', 'desc')->where('user_id', $uid)->paginate(20);
 

@@ -19,15 +19,15 @@
                             <li>
                                 <a href="#" style="margin: 0 5px;">Company </a>
                                 <ul>
-                                    <li><a href="{{url('about')}}">About</a></li>
+                                    <li><a href="{{url('about')}}">About Us</a></li>
                                     <li><a href="{{url('about')}}">Investment Plans</a></li>
                                     <li><a href="{{url('about')}}">Why Choose Us</a></li>
                                 </ul>
                             </li>
                             <li><a href="{{url('contact')}}" style="margin: 0 5px;">Support </a></li>
                             <li><a href="{{url('terms')}}" style="margin: 0 5px;">Terms </a></li>
-                            <li><a href="{{route('login')}}" style="margin: 0 5px;">Login </a></li>
                             <li><a href="{{route('user.register')}}">Register</a></li>
+                            <li><a href="{{route('login')}}" style="margin: 0 5px;">Login </a></li>
                             <li style="margin: 0 20px;">
                                 <script type="text/javascript">
                                     function googleTranslateElementInit() {

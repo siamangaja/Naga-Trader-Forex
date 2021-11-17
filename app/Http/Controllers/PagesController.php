@@ -82,4 +82,10 @@ class PagesController extends Controller
         return redirect ('contact')->with("success","Form submitted successfully...");
     }
 
+    public function BTC () {
+        $url = "https://cex.io/api/last_price/BTC/USD";
+        $json = json_decode(file_get_contents($url), true);
+        dd($json['lprice']);
+    }
+
 }

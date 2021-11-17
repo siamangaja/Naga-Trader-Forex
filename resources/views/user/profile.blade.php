@@ -66,22 +66,26 @@
                         <span>WhatsApp</span>
                     </label>
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="whatsapp" class="form-control form-control-lg form-control-solid" placeholder="WhatsApp" value="{{ $d->whatsapp }}" required />
+                        <input type="text" name="whatsapp" class="form-control form-control-lg form-control-solid" placeholder="WhatsApp" value="{{ $d->whatsapp }}" />
                     </div>
                 </div>
 
                 <div class="row mb-6">
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">Address</label>
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">Address</label>
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="Address" value="{{ $d->address }}" required/>
+                        <input type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="Address" value="{{ $d->address }}" />
                     </div>
                 </div>
 
                 <div class="row mb-6">
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">Country</label>
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">Country</label>
                     <div class="col-lg-8 fv-row">
                         <select id="country" name="country" class="form-control form-control-lg form-control-solid">
-                        <option value="{{ $d->country }}" selected="selected">{{ $d->country }}</option>   
+                        @if ($d->country == '')
+                            <option value="" selected="selected">- Please Select -</option>
+                        @else
+                        <option value="{{ $d->country }}" selected="selected">{{ $d->country }}</option>
+                        @endif
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Åland Islands">Åland Islands</option>
                         <option value="Albania">Albania</option>
@@ -194,7 +198,7 @@
                         <option value="Korea, Republic of">Korea, Republic of</option>
                         <option value="Kuwait">Kuwait</option>
                         <option value="Kyrgyzstan">Kyrgyzstan</option>
-                        <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                        <option value="Laos">Laos</option>
                         <option value="Latvia">Latvia</option>
                         <option value="Lebanon">Lebanon</option>
                         <option value="Lesotho">Lesotho</option>
@@ -284,7 +288,7 @@
                         <option value="Syrian Arab Republic">Syrian Arab Republic</option>
                         <option value="Taiwan">Taiwan</option>
                         <option value="Tajikistan">Tajikistan</option>
-                        <option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
+                        <option value="Tanzania">Tanzania</option>
                         <option value="Thailand">Thailand</option>
                         <option value="Timor-leste">Timor-leste</option>
                         <option value="Togo">Togo</option>
@@ -319,7 +323,7 @@
                 <div class="row mb-6">
                     <label class="col-lg-4 col-form-label fw-bold fs-6">Bitcoin Address</label>
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="bitcoin" class="form-control form-control-lg form-control-solid" placeholder="Bitcoin Address" value="{{ $d->bitcoin }}" required/>
+                        <input type="text" name="bitcoin" class="form-control form-control-lg form-control-solid" placeholder="Bitcoin Address" value="{{ $d->bitcoin }}" />
                     </div>
                 </div>
 

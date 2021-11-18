@@ -11,7 +11,6 @@ use App\Http\Controllers\DepositController;
 
 
 Route::get('/btc', [PagesController::class,'BTC'])->name('BTC');
-
 Route::get('/', [PagesController::class,'frontpage'])->name('frontpage');
 
 Route::get('/admin/login', [AdminAuthController::class,'getLogin'])->name('login-admin');
@@ -96,6 +95,9 @@ Route::group(['middleware' => ['auth:user']], function () {
     Route::post('/user/bank/save', [DepositController::class,'SaveBank']);
     Route::post('/user/bank/store', [DepositController::class,'StoreBank']);
     Route::get('/user/wallet', [DepositController::class,'WalletUser'])->name('user.wallet');
+    Route::get('/user/virtual-balance', [DepositController::class,'VirtualBalanceUser'])->name('user.virtual-balance');
+
+    Route::get('/user/transactions', [DepositController::class,'TransactionsIndex'])->name('user.transactions-index');
 });
 
 Route::get('/login', [UserLoginController::class,'showLoginForm'])->name('login');

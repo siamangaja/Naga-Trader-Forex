@@ -76,4 +76,9 @@ class User extends Authenticatable
         return $this->hasMany(VirtualBalance::class, 'id');
     }
 
+    public function Transactions()
+    {
+        return $this->hasMany(Transactions::class, 'id');
+    }
+
 }

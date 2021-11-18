@@ -11,7 +11,7 @@
 <div class="row g-5 g-xl-8">
     <div class="col-xl-3">
         <!--begin::Statistics Widget 5-->
-        <a href="user" class="card bg-success hoverable card-xl-stretch mb-xl-8">
+        <a href="user/wallet" class="card bg-success hoverable card-xl-stretch mb-xl-8">
             <!--begin::Body-->
             <div class="card-body">
                 <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm002.svg-->

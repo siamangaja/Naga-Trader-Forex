@@ -61,14 +61,19 @@ class User extends Authenticatable
     //     return $this->hasMany(BankUsers::class, 'id');
     // }
 
-    // public function Wallet()
-    // {
-    //     return $this->hasMany(Wallet::class, 'id');
-    // }
-
     // public function Order()
     // {
     //     return $this->hasMany(Order::class, 'id');
     // }
+
+    public function Wallet()
+    {
+        return $this->hasMany(Wallet::class, 'id');
+    }
+
+    public function VirtualBalance()
+    {
+        return $this->hasMany(VirtualBalance::class, 'id');
+    }
 
 }

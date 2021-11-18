@@ -58,7 +58,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <label class="col-lg-4 col-form-label fw-bold fs-6">{{ $d->bank }}</label>
+                        <label class="col-lg-4 col-form-label fw-bold fs-6">{{ $d->bank_name }}</label>
                     </div>
                     <!--end::Col-->
                 </div>

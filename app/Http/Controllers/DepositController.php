@@ -58,7 +58,6 @@ class DepositController extends Controller
                 'name'      => $request->name,
                 'email'     => $request->email,
                 'phone'     => $request->phone,
-                'whatsapp'  => $request->whatsapp,
                 'address'   => $request->address,
                 'country'   => $request->country,
                 'bitcoin'   => $request->bitcoin,

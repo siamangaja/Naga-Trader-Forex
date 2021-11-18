@@ -18,6 +18,10 @@ use App\Models\Prices;
 use App\Models\Pages;
 use App\Models\Partners;
 use App\Models\Options;
+use App\Models\Deposit;
+use App\Models\Wallet;
+use App\Models\Withdraw;
+use App\Models\VirtualBalance;
 
 class AdminController extends Controller
 {
@@ -346,70 +350,6 @@ class AdminController extends Controller
         }
     }
 
-    // public function teamIndex () {
-    //     $title = 'Team';
-    //     $data = Team::orderBy('id', 'desc')->paginate(20);
-    //     return view('admin.team-index', [
-    //         'data'  => $data,
-    //         'title' => $title,
-    //     ]);
-    // }
-
-    // public function teamAdd () {
-    //     $title = 'Add Team';
-    //     return view('admin.team-add', [
-    //         'title' => $title,
-    //     ]);
-    // }
-
-    // public function teamStore (Request $request) {
-    //     $request->validate([
-    //         'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
-    //     ]);
-    //     $file = $request->file('image');
-    //     $imageName1 = time().'-'.$file->getClientOriginalName();
-    //     $imageName2 = Str::lower($imageName1);
-    //     $imageName3 = preg_replace('/\s+/', '', $imageName2);
-    //     $img = $request->image->move(public_path('storage/images'), $imageName3);
-
-    //     $Team = new Team;
-    //     $Team->name     = $request->name;
-    //     $Team->position = $request->position;
-    //     $Team->image    = $imageName3;
-    //     $Team->save();
-    //     return redirect ('admin/team')->with("success","Data created successfully...");
-    // }
-
-    // public function teamEdit ($id) {
-    //     $data = Team::where('id',$id)->first();
-    //     return view('admin.team-edit', [
-    //         'data' => $data,
-    //         'title' => 'Edit Team',
-    //     ]);
-    // }
-
-    // public function teamUpdate (Request $request)
-    // {
-    //     $update = Team::where('id',$request->id)
-    //         ->update([
-    //             'name'      => $request->name,
-    //             'position'  => $request->position,
-    //             //'image'     => $request->image,
-    //         ]);
-    //     return redirect ('admin/team')->with("success","Data updated successfully...");
-    // }
-
-    // public function teamDelete (Request $request) {
-    //     $Team = Team::where('id', $request->id)->get();
-    //     if (!$Team) {
-    //         return redirect ('admin/team')->with("error","Ups! Something wrong...");
-    //     }
-    //     else{
-    //         $Delete = Team::where('id', $request->id)->delete();
-    //         return redirect ('admin/team')->with("success","Data deleted successfully...");
-    //     }
-    // }
-
     public function priceIndex () {
         $title = 'Price';
         $data = Prices::orderBy('id', 'desc')->paginate(20);
@@ -614,6 +554,113 @@ class AdminController extends Controller
                 'value' => $request->value,
             ]);
         return redirect ('admin/options')->with("success","Web Options updated successfully...");
+    }
+
+    public function IndexDeposit() {
+        $title = 'Data Deposit';
+        $data = Deposit::orderBy('id', 'desc')->with('User')->paginate(20);
+        return view('admin.deposit-index', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function DeleteDeposit (Request $request) {
+        $Deposit = Deposit::where('ref', $request->ref)->get();
+        if (!$Deposit) {
+            return redirect ('admin/deposit')->with("error","Terjadi kesalahan...");
+        }
+        else{
+            $Delete = Deposit::where('ref', $request->ref)->delete();
+            return redirect ('admin/deposit')->with("success","Data berhasil dihapus...");
+        }
+    }
+
+    public function ValidateDeposit (Request $request) {
+        $Deposit = Deposit::where('ref', $request->ref)->first();
+        if (!$Deposit) {
+            return redirect ('admin/deposit')->with("error","Terjadi kesalahan...");
+        }
+        else {
+            $update = Deposit::where('ref', $Deposit->ref)
+            ->update([
+                'status' => 1
+            ]);
+
+            $databalance = Wallet::orderBy('id', 'desc')->where('user_id', $Deposit->user_id)->take(1)->get();
+
+            if ($databalance) {
+                $balance = 0;
+            }
+
+            foreach($databalance as $b) {
+                $balance = $b->balance;
+            }
+
+            //Tambahkan balance ke User
+            $NewWallet = new Wallet;
+            $NewWallet->user_id = $Deposit->user_id;
+            $NewWallet->type    = 'credit';
+            $NewWallet->amount  = $Deposit->total;
+            $NewWallet->balance = $balance+$Deposit->total;
+            $NewWallet->notes   = 'Deposit: '.$Deposit->ref;
+            $NewWallet->save();
+            return redirect ('admin/deposit')->with("success","Data berhasil divalidasi...");
+        }
+    }
+
+    public function IndexWithdraw() {
+        $title = 'Data Withdraw';
+        $data = Withdraw::orderBy('id', 'desc')->with('User')->paginate(20);
+        return view('admin.withdraw-index', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function DeleteWithdraw (Request $request) {
+        $Withdraw = Withdraw::where('ref', $request->ref)->get();
+        if (!$Withdraw) {
+            return redirect ('admin/withdraw')->with("error","Terjadi kesalahan...");
+        }
+        else{
+            $Delete = Withdraw::where('ref', $request->ref)->delete();
+            return redirect ('admin/withdraw')->with("success","Data berhasil dihapus...");
+        }
+    }
+
+    public function ValidateWithdraw (Request $request) {
+        $Withdraw = Withdraw::where('ref', $request->ref)->first();
+        if (!$Withdraw) {
+            return redirect ('admin/withdraw')->with("error","Terjadi kesalahan...");
+        }
+        else {
+            $update = Withdraw::where('ref', $Withdraw->ref)
+            ->update([
+                'status' => 1
+            ]);
+            return redirect ('admin/withdraw')->with("success","Data berhasil divalidasi...");
+        }
+    }
+
+    public function IndexVirtualBalance() {
+        $title = 'Virtual Balance';
+        $data = VirtualBalance::orderBy('id', 'desc')->with('User')->paginate(20);
+        return view('admin.virtual-balance', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+     public function DeleteVirtualBalance (Request $request) {
+        $VirtualBalance = VirtualBalance::where('id', $request->id)->get();
+        if (!$VirtualBalance) {
+            return redirect ('admin/virtual-balance')->with("error","Terjadi kesalahan...");
+        }
+        else{
+            $Delete = VirtualBalance::where('id', $request->id)->delete();
+            return redirect ('admin/virtual-balance')->with("success","Data berhasil dihapus...");
+        }
     }
 
 }

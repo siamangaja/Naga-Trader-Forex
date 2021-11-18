@@ -67,6 +67,15 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/options', [AdminController::class,'optionsIndex'])->name('options.index');
     Route::get('/admin/options/{id}/edit', [AdminController::class,'optionsEdit'])->name('options.edit');
     Route::post('/admin/options/{id}/edit', [AdminController::class,'optionsUpdate'])->name('options.update');
+    Route::get('/admin/deposit', [AdminController::class,'IndexDeposit'])->name('admin.deposit');
+    Route::get('/admin/deposit/delete/{ref}', [AdminController::class,'DeleteDeposit']);
+    Route::get('/admin/deposit/confirm/{ref}', [AdminController::class,'ValidateDeposit']);
+
+    Route::get('/admin/withdraw', [AdminController::class,'IndexWithdraw'])->name('admin.withdraw');
+    Route::get('/admin/withdraw/delete/{ref}', [AdminController::class,'DeleteWithdraw']);
+    Route::get('/admin/withdraw/confirm/{ref}', [AdminController::class,'ValidateWithdraw']);
+    Route::get('/admin/virtual-balance', [AdminController::class,'IndexVirtualBalance'])->name('admin.virtualbalance');
+    Route::get('/admin/virtual-balance/{id}/delete', [AdminController::class,'DeleteVirtualBalance']);
 });
 
 // User

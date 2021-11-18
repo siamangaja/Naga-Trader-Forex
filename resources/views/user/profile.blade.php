@@ -62,15 +62,6 @@
                 </div>
 
                 <div class="row mb-6">
-                    <label class="col-lg-4 col-form-label fw-bold fs-6">
-                        <span>WhatsApp</span>
-                    </label>
-                    <div class="col-lg-8 fv-row">
-                        <input type="text" name="whatsapp" class="form-control form-control-lg form-control-solid" placeholder="WhatsApp" value="{{ $d->whatsapp }}" />
-                    </div>
-                </div>
-
-                <div class="row mb-6">
                     <label class="col-lg-4 col-form-label fw-bold fs-6">Address</label>
                     <div class="col-lg-8 fv-row">
                         <input type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="Address" value="{{ $d->address }}" />

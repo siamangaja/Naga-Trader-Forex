@@ -22,6 +22,7 @@ use App\Models\Deposit;
 use App\Models\Wallet;
 use App\Models\Withdraw;
 use App\Models\VirtualBalance;
+use App\Models\Transactions;
 
 class AdminController extends Controller
 {
@@ -661,6 +662,15 @@ class AdminController extends Controller
             $Delete = VirtualBalance::where('id', $request->id)->delete();
             return redirect ('admin/virtual-balance')->with("success","Data berhasil dihapus...");
         }
+    }
+
+    public function IndexTransactions() {
+        $title = 'Transactions';
+        $data = Transactions::orderBy('id', 'desc')->with('User')->paginate(20);
+        return view('admin.transactions-index', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
     }
 
 }

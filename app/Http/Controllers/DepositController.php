@@ -16,6 +16,7 @@ use App\Models\Wallet;
 use App\Models\BankAdmin;
 use App\Models\BankUsers;
 use App\Models\VirtualBalance;
+use App\Models\Transactions;
 
 class DepositController extends Controller
 {
@@ -296,22 +297,37 @@ class DepositController extends Controller
     public function TransactionsIndex() {
         $uid = auth()->id();
         $title = 'Transactions';
-        $databalance = Transactions::orderBy('id', 'desc')->where('user_id', $uid)->take(1)->get();
         $data = Transactions::orderBy('id', 'desc')->where('user_id', $uid)->paginate(20);
-
-        if ($databalance) {
-            $balance = 0;
-        }
-
-        foreach($databalance as $b) {
-            $balance = $b->balance;
-        }
-
-        return view('user.vbalance-index', [
+        return view('user.transactions-index', [
             'data' => $data,
-            'balance' => $balance,
             'title' => $title,
         ]);
+    }
+
+    public function Order ($amount) {
+        $url = "https://cex.io/api/last_price/BTC/USD";
+        $API_data = json_decode(file_get_contents($url), true);
+        $price = $API_data['lprice'];
+        $NewOrder = new Transactions;
+        $NewOrder->trx_id   = (string) Str::uuid();
+        $NewOrder->user_id  = auth()->id();
+        $NewOrder->type     = 'buy';
+        $NewOrder->symbol   = 'btcusd';
+        $NewOrder->price    = $price;
+        $NewOrder->amount   = $amount;
+        $NewOrder->fee      = 0;
+        $NewOrder->total    = $NewOrder->price*$NewOrder->amount;
+        $NewOrder->notes    = '';
+        $NewOrder->status   = 0;
+
+        $vbalance = VirtualBalance::orderBy('id', 'desc')->where('user_id', auth()->id())->take(1)->first();
+
+        if ($vbalance->balance < $NewOrder->total) {
+            return redirect ('user/transactions')->with("error","Virtual Balance Anda tidak mencukupi...");
+        }
+
+        $NewOrder->save();
+        return redirect ('user/transactions');
     }
 
 

@@ -69,12 +69,12 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/deposit', [AdminController::class,'IndexDeposit'])->name('admin.deposit');
     Route::get('/admin/deposit/delete/{ref}', [AdminController::class,'DeleteDeposit']);
     Route::get('/admin/deposit/confirm/{ref}', [AdminController::class,'ValidateDeposit']);
-
     Route::get('/admin/withdraw', [AdminController::class,'IndexWithdraw'])->name('admin.withdraw');
     Route::get('/admin/withdraw/delete/{ref}', [AdminController::class,'DeleteWithdraw']);
     Route::get('/admin/withdraw/confirm/{ref}', [AdminController::class,'ValidateWithdraw']);
     Route::get('/admin/virtual-balance', [AdminController::class,'IndexVirtualBalance'])->name('admin.virtualbalance');
     Route::get('/admin/virtual-balance/{id}/delete', [AdminController::class,'DeleteVirtualBalance']);
+    Route::get('/admin/transactions', [AdminController::class,'IndexTransactions'])->name('admin.transactions');
 });
 
 // User
@@ -96,8 +96,8 @@ Route::group(['middleware' => ['auth:user']], function () {
     Route::post('/user/bank/store', [DepositController::class,'StoreBank']);
     Route::get('/user/wallet', [DepositController::class,'WalletUser'])->name('user.wallet');
     Route::get('/user/virtual-balance', [DepositController::class,'VirtualBalanceUser'])->name('user.virtual-balance');
-
     Route::get('/user/transactions', [DepositController::class,'TransactionsIndex'])->name('user.transactions-index');
+    Route::get('/user/order/{amount}', [DepositController::class,'Order'])->name('user.order');
 });
 
 Route::get('/login', [UserLoginController::class,'showLoginForm'])->name('login');

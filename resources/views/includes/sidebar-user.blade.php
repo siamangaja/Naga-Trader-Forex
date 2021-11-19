@@ -102,7 +102,7 @@
     </div>
 
     <div class="menu-item">
-        <a class="menu-link {{set_active('user.transactions')}}" href="user/transactions">
+        <a class="menu-link {{set_active('user.transactions-index')}}" href="user/transactions">
             <span class="menu-icon">
                 <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
                 <span class="svg-icon svg-icon-2">

@@ -4,8 +4,59 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e38664dc2e1313269ea0f10ec8cbadf",
+    "content-hash": "10440160948ace2a81b074a7908cd413",
     "packages": [
+        {
+            "name": "arispati/indodax",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arispati/Indodax.git",
+                "reference": "c59f7f24c21198ddc28426ee1d0fcbdebd7c2b22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arispati/Indodax/zipball/c59f7f24c21198ddc28426ee1d0fcbdebd7c2b22",
+                "reference": "c59f7f24c21198ddc28426ee1d0fcbdebd7c2b22",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3.1|^7.0.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0",
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Arispati\\Indodax\\Provider\\IndodaxServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Arispati\\Indodax\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aris",
+                    "email": "masarispati@gmail.com"
+                }
+            ],
+            "description": "Indodax API",
+            "support": {
+                "issues": "https://github.com/arispati/Indodax/issues",
+                "source": "https://github.com/arispati/Indodax/tree/v1.0.1"
+            },
+            "time": "2021-05-05T03:56:26+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.0.3",

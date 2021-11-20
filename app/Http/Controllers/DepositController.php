@@ -308,6 +308,7 @@ class DepositController extends Controller
         $url = "https://cex.io/api/last_price/BTC/USD";
         $API_data = json_decode(file_get_contents($url), true);
         $price = $API_data['lprice'];
+        //$price = 58818.67;
         $NewOrder = new Transactions;
         $NewOrder->trx_id   = (string) Str::uuid();
         $NewOrder->user_id  = auth()->id();
@@ -318,15 +319,34 @@ class DepositController extends Controller
         $NewOrder->fee      = 0;
         $NewOrder->total    = $NewOrder->price*$NewOrder->amount;
         $NewOrder->notes    = '';
-        $NewOrder->status   = 0;
+        $NewOrder->status   = 1;
 
-        $vbalance = VirtualBalance::orderBy('id', 'desc')->where('user_id', auth()->id())->take(1)->first();
+        $VirtualBalance = VirtualBalance::orderBy('id', 'desc')->where('user_id', auth()->id())->take(1)->get();
 
-        if ($vbalance->balance < $NewOrder->total) {
-            return redirect ('user/transactions')->with("error","Virtual Balance Anda tidak mencukupi...");
+        if ($VirtualBalance) {
+            $vbalance = 0;
+        }
+
+        foreach($VirtualBalance as $b) {
+            $vbalance = $b->balance;
+        }
+
+        
+        if ($vbalance < $NewOrder->total) {
+            return redirect ('user/transactions')->with("error","Insufficient balance...");
         }
 
         $NewOrder->save();
+
+        // Simpan Data ke Virtual Balance
+        $NewVirtualBalance = new VirtualBalance;
+        $NewVirtualBalance->user_id = auth()->id();
+        $NewVirtualBalance->type    = 'debet';
+        $NewVirtualBalance->amount  = $NewOrder->total;
+        $NewVirtualBalance->balance = $vbalance-$NewOrder->total;
+        $NewVirtualBalance->notes   = 'Order: '.$NewOrder->trx_id;
+        $NewVirtualBalance->save();
+
         return redirect ('user/transactions');
     }
 

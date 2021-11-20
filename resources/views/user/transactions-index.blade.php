@@ -93,9 +93,37 @@
 
                 <a href="{{url('user/order/2000')}}" class="btn btn-primary btn-active-light-dark">Order Now</a>
 
-
             </div>
             <!--end::Table container-->
+
+            
+            <br><br>
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+              <div id="tradingview_04a74"></div>
+              <!-- <div class="tradingview-widget-copyright"><a href="//www.tradingview.com/symbols/BTCUSD/?exchange=COINBASE" rel="noopener" target="_blank"><span class="blue-text">BTCUSD Chart</span></a> by TradingView</div> -->
+              <script type="text/javascript" src="//s3.tradingview.com/tv.js"></script>
+              <script type="text/javascript">
+              new TradingView.widget(
+              {
+              "width": 850,
+              "height": 600,
+              "symbol": "COINBASE:BTCUSD",
+              "interval": "D",
+              "timezone": "Asia/Jakarta",
+              "theme": "light",
+              "style": "1",
+              "locale": "en",
+              "toolbar_bg": "#f1f3f6",
+              "enable_publishing": false,
+              "container_id": "tradingview_04a74"
+            }
+              );
+              </script>
+            </div>
+            <!-- TradingView Widget END -->
+
+
 
             <div class="d-flex justify-content-start">
                 {{ $data->links() }}

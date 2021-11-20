@@ -68,8 +68,8 @@
                                 @endif
                             </td>
                             <td>{{ $d->notes }}</td>
-                            <td>{{ number_format($d->amount, 0) }}</td>
-                            <td>{{ number_format($d->balance, 0) }}</td>
+                            <td>{{ $d->amount }}</td>
+                            <td>{{ $d->balance }}</td>
                         </tr>
                         @empty
                         <tr>

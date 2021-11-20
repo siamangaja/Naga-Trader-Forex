@@ -64,8 +64,8 @@
                                    <span class="badge badge-light-danger fw-bolder px-4 py-3">Debet</span>
                                 @endif
                             </td>
-                            <td>{{ number_format($d->amount, 0) }}</td>
-                            <td>{{ number_format($d->balance, 0) }}</td>
+                            <td>{{ $d->amount }}</td>
+                            <td>{{ $d->balance }}</td>
                             <td>{{ $d->notes }}</td>
                             <td>
                                 <a href="admin/virtual-balance/{{$d->id}}/delete" onclick="return confirm('Yakin untuk menghapus data ini?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>

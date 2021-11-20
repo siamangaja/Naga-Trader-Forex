@@ -14,6 +14,9 @@ use App\Models\Partners;
 use App\Models\Prices;
 use App\Models\Features;
 use Illuminate\Support\Facades\Mail;
+use Arispati\Indodax\Indodax;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 class PagesController extends Controller
 {
@@ -86,6 +89,14 @@ class PagesController extends Controller
         $url = "https://cex.io/api/last_price/BTC/USD";
         $json = json_decode(file_get_contents($url), true);
         dd($json['lprice']);
+    }
+
+    public function Indodax () {
+        $harga = Indodax::getTicker('btcidr');
+        dd($harga);
+        // $indodax = "https://indodax.com/api/ticker/btcidr";
+        // $data = json_decode(file_get_contents($indodax), true);
+        // dd($data['ticker']['last']);
     }
 
 }

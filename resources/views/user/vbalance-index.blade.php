@@ -32,7 +32,7 @@
             </span>
             <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
                 <div class="mb-3 mb-md-0 fw-bold">
-                    <h4 class="text-gray-900 fw-bolder">Virtual Balance: USD {{ number_format($balance, 0) }}</h4>
+                    <h4 class="text-gray-900 fw-bolder">Virtual Balance: USD {{ $balance }}</h4>
                 </div>
             </div>
         </div>

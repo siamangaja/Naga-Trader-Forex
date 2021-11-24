@@ -9,6 +9,8 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DepositController;
 
+Route::get('/coba', [PagesController::class,'Coba'])->name('coba');
+
 Route::get('/btc', [PagesController::class,'BTC'])->name('BTC');
 Route::get('/indodax', [PagesController::class,'Indodax'])->name('Indodax');
 Route::get('/', [PagesController::class,'frontpage'])->name('frontpage');

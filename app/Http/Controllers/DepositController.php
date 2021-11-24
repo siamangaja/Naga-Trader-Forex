@@ -121,10 +121,9 @@ class DepositController extends Controller
         $NewDeposit->bank_number    = $bank->number;
         $NewDeposit->bank_account   = $bank->account_name;
         $NewDeposit->amount         = $request->amount;
-        $NewDeposit->fee            = rand(1,7);
+        $NewDeposit->fee            = rand(12, 57) / 100;
         $NewDeposit->total          = $NewDeposit->amount+$NewDeposit->fee;
-        $NewDeposit->notes          = $request->notes;
-        $NewDeposit->ref            = (string) Str::uuid();
+        $NewDeposit->ref            = strtoupper(substr(md5(microtime()), 0, 12));
         $NewDeposit->save();
         return redirect ('user/deposit/'.$NewDeposit->ref);
     }
@@ -206,7 +205,7 @@ class DepositController extends Controller
         $NewWithdraw->amount        = $request->amount;
         $NewWithdraw->fee           = 0;
         $NewWithdraw->total         = $NewWithdraw->amount+$NewWithdraw->fee;
-        $NewWithdraw->ref           = (string) Str::uuid();
+        $NewWithdraw->ref           = strtoupper(substr(md5(microtime()), 0, 12));
         $NewWithdraw->save();
 
         //Simpan balance
@@ -308,9 +307,8 @@ class DepositController extends Controller
         $url = "https://cex.io/api/last_price/BTC/USD";
         $API_data = json_decode(file_get_contents($url), true);
         $price = $API_data['lprice'];
-        //$price = 58818.67;
         $NewOrder = new Transactions;
-        $NewOrder->trx_id   = (string) Str::uuid();
+        $NewOrder->trx_id   = strtoupper(substr(md5(microtime()), 0, 12));
         $NewOrder->user_id  = auth()->id();
         $NewOrder->type     = 'buy';
         $NewOrder->symbol   = 'btcusd';

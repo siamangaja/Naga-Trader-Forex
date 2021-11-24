@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use App\Models\VirtualBalance;
 
 class UserRegisterController extends Controller
 {
@@ -42,6 +43,15 @@ class UserRegisterController extends Controller
       $user->status         = 1;
       $user->remember_token = Str::random(100);
       $user->save();
+
+      // Tambahkan Virtual Balance
+      $vBalance = new VirtualBalance();
+      $vBalance->user_id  = $user->id; //auth()->id();
+      $vBalance->type     = 'credit';
+      $vBalance->amount   = 10000;
+      $vBalance->balance  = 10000;
+      $vBalance->notes    = 'Free Register Balance';
+      $vBalance->save();
 
       // Verifikasi email pendaftaran User:
       // $datanotif = [

@@ -18,8 +18,8 @@ class CreateWalletTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->index();
             $table->string('type', 12);
-            $table->integer('amount');
-            $table->integer('balance');
+            $table->double('amount');
+            $table->double('balance');
             $table->string('notes')->nullable();
             $table->timestamps();
 

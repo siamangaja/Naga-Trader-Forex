@@ -37,10 +37,10 @@
                     <!--begin::Head-->
                     <thead class="fs-7 text-gray-400 text-uppercase">
                         <tr>
-                            <th class="min-w-150px">Tanggal</th>
+                            <th class="min-w-100px">Ref</th>
+                            <th class="min-w-100px">Tanggal</th>
                             <th class="min-w-250px">Bank Tujuan</th>
                             <th class="min-w-90px">Nominal</th>
-                            <th class="min-w-250px">Catatan Anda</th>
                             <th class="min-w-90px">Status</th>
                         </tr>
                     </thead>
@@ -49,10 +49,10 @@
                     <tbody class="fs-6">
                         @forelse ($data as $d)
                         <tr>
-                            <td><a href="{{url('user/deposit', $d->ref)}}">{{ $d->created_at }}</a></td>
+                            <td><a href="{{url('user/deposit', $d->ref)}}">{{ $d->ref }}</a></td>
+                            <td>{{ $d->created_at }}</td>
                             <td>{{ $d->bank_name }}<br>{{ $d->bank_number }}<br>{{ $d->bank_account }}</td>
-                            <td>{{ number_format($d->total, 0) }}</td>
-                            <td>{{ $d->notes }}</td>
+                            <td>{{ $d->total }}</td>
                             <td>
                                 @if ($d->status == 0)
                                     <span class="badge badge-light-warning fw-bolder px-4 py-3">Diverifikasi</span>

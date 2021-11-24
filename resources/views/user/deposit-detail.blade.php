@@ -51,6 +51,15 @@
             </div>
             @endif
 
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">
+                        <span class="">Ref:</span>
+                    </label>
+                    <div class="col-lg-8 fv-row">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6">{{ $d->ref }}</label>
+                    </div>
+                </div>
+
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
@@ -94,24 +103,15 @@
                 <div class="row mb-6">
                     <label class="col-lg-4 col-form-label fw-bold fs-6">
                         <span class="">Jumlah (Nominal):</span>
-                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="(Transfer sesuai nominal tersebut untuk mempermudahkan proses verifikasi. 3 kode unik dibelakang akan masuk ke saldo akun Anda)"></i>
+                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="(Transfer sesuai nominal tersebut untuk mempermudahkan proses verifikasi)"></i>
                     </label>
                     <div class="col-lg-8 fv-row">
                         <label class="btn btn-outline btn-outline-dashed text-start py-2 px-3">
-                            USD {{ number_format($d->total, 0) }}
+                            USD {{ $d->total }}
                         </label>
                         <div style="padding: 5px;">
-                            <span style="font-style: italic; font-size: 12px;">(Transfer sesuai nominal tersebut untuk mempermudahkan proses verifikasi. 3 kode unik dibelakang akan masuk ke saldo akun Anda)</span>
+                            <span style="font-style: italic; font-size: 12px;">(Transfer sesuai nominal tersebut untuk mempermudahkan proses verifikasi)</span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="row mb-6">
-                    <label class="col-lg-4 col-form-label fw-bold fs-6">
-                        <span class="">Catatan Anda:</span>
-                    </label>
-                    <div class="col-lg-8 fv-row">
-                        <label class="col-lg-4 col-form-label fw-bold fs-6">{{ $d->notes }}</label>
                     </div>
                 </div>
 

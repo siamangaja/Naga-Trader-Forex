@@ -99,4 +99,10 @@ class PagesController extends Controller
         // dd($data['ticker']['last']);
     }
 
+    public function Coba () {
+        //$rand = strtoupper(substr(md5(microtime()), 0, 12));
+        $rand = rand(12, 57) / 100;
+        dd($rand);
+    }
+
 }

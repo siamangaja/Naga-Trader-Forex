@@ -16,15 +16,14 @@ class CreateDepositTable extends Migration
     {
         Schema::create('deposit', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('ref')->nullable();
             $table->unsignedBigInteger('user_id')->index();
             $table->string('bank_name', 50);
             $table->string('bank_number', 50);
             $table->string('bank_account', 50);
-            $table->integer('amount');
-            $table->integer('fee');
-            $table->integer('total');
-            $table->string('notes')->nullable();
-            $table->string('ref')->nullable();
+            $table->double('amount');
+            $table->double('fee');
+            $table->double('total');
             $table->integer('status')->default(0); //0 = pending; 1 = success;
             $table->timestamps();
 

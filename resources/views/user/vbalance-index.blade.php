@@ -38,7 +38,7 @@
         </div>
 
         <br><br>
-        <h5>Riwayat Transaksi</h5>
+        <h5>Logs</h5>
 
             <!--begin::Table container-->
             <div class="table-responsive">

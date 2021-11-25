@@ -87,7 +87,7 @@
                 </table>
                 <!--end::Table-->
 
-                <a href="{{url('user/order/2000')}}" class="btn btn-primary btn-active-light-dark">Order Now</a>
+                <!-- <a href="{{url('user/order/2000')}}" class="btn btn-primary btn-active-light-dark">Order Now</a> -->
 
             </div>
             <!--end::Table container-->

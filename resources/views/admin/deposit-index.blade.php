@@ -45,7 +45,6 @@
                             <th class="min-w-50px">User</th>
                             <th class="min-w-250px">Bank Tujuan</th>
                             <th class="min-w-50px">Jumlah</th>
-                            <th class="min-w-100px">Notes</th>
                             <th class="min-w-50px">Status</th>
                             <th class="min-w-300px">Aksi</th>
                         </tr>
@@ -58,8 +57,7 @@
                             <td>{{ $d->created_at }}</td>
                             <td>{{ $d->user->name }}</td>
                             <td>{{ $d->bank_name }}<br>{{ $d->bank_number }}<br>{{ $d->bank_account }}</td>
-                            <td>{{ number_format($d->total, 0) }}</td>
-                            <td>{{ $d->notes }}</td>
+                            <td>{{ $d->total }}</td>
                             <td>
                                 @if ($d->status == 0)
                                     <span class="badge badge-light-warning fw-bolder px-4 py-3">Pending</span>

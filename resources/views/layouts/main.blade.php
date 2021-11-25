@@ -69,7 +69,7 @@
                         <!--begin::Brand-->
                         <div class="header-brand">
                             <!--begin::Logo-->
-                            <a href="admin">
+                            <a href="{{route('frontpage')}}">
                                 <img alt="Logo" src="storage/images/logo.png" class="h-25px h-lg-25px" />
                             </a>
                             <!--end::Logo-->

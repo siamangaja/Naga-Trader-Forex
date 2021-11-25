@@ -42,12 +42,10 @@
                     <thead class="fs-7 text-gray-400 text-uppercase">
                         <tr>
                             <th class="min-w-150px">Timestamp</th>
-                            <th class="min-w-150px">Trx ID</th>
+                            <th class="min-w-100px">Trx ID</th>
                             <th class="min-w-50px">Type</th>
-                            <th class="min-w-50px">Symbol</th>
-                            <th class="min-w-50px">Price</th>
-                            <th class="min-w-50px">Qty</th>
-                            <th class="min-w-50px">Total</th>
+                            <th class="min-w-50px">Market</th>
+                            <th class="min-w-50px">Amount</th>
                             <th class="min-w-50px">Status</th>
                         </tr>
                     </thead>
@@ -65,10 +63,8 @@
                                    <span class="badge badge-light-danger fw-bolder px-4 py-3">Sell</span>
                                 @endif
                             </td>
-                            <td>{{ strtoupper($d->symbol) }}</td>
-                            <td>{{ $d->price }}</td>
+                            <td>{{ strtoupper($d->market) }}</td>
                             <td>{{ $d->amount }}</td>
-                            <td>{{ $d->total }}</td>
                             <td>
                                 @if ($d->status == 0)
                                     <span class="badge badge-light-warning fw-bolder px-4 py-3">Pending</span>
@@ -96,12 +92,19 @@
             </div>
             <!--end::Table container-->
 
+            <div class="d-flex justify-content-start">
+                {{ $data->links() }}
+            </div>
+
+            <table>
+                <th class="min-w-50px"><a href="{{url('user/order/2000')}}" class="btn btn-success">BUY 180%</a></th>
+                <th class="min-w-50px"><a href="{{url('user/order/2000')}}" class="btn btn-danger">SELL 180%</a></th>
+            </table>
             
             <br><br>
             <!-- TradingView Widget BEGIN -->
             <div class="tradingview-widget-container">
               <div id="tradingview_04a74"></div>
-              <!-- <div class="tradingview-widget-copyright"><a href="//www.tradingview.com/symbols/BTCUSD/?exchange=COINBASE" rel="noopener" target="_blank"><span class="blue-text">BTCUSD Chart</span></a> by TradingView</div> -->
               <script type="text/javascript" src="//s3.tradingview.com/tv.js"></script>
               <script type="text/javascript">
               new TradingView.widget(
@@ -122,12 +125,6 @@
               </script>
             </div>
             <!-- TradingView Widget END -->
-
-
-
-            <div class="d-flex justify-content-start">
-                {{ $data->links() }}
-            </div>
 
         </div>
         <!--end::Card body-->

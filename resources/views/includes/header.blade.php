@@ -20,8 +20,6 @@
                                 <a href="#" style="margin: 0 5px;">Company </a>
                                 <ul>
                                     <li><a href="{{url('about')}}">About Us</a></li>
-                                    <li><a href="{{url('about')}}">Investment Plans</a></li>
-                                    <li><a href="{{url('about')}}">Why Choose Us</a></li>
                                 </ul>
                             </li>
                             <li><a href="{{url('contact')}}" style="margin: 0 5px;">Support </a></li>

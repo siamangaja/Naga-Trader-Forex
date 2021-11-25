@@ -6,7 +6,7 @@
                 <div class="footer_logo">
                     <a href="{{route('frontpage')}}"><img src="img/logo.png" alt="{{opsi('website')}}" title="{{opsi('website')}}" /></a>
                 </div>
-                <p class="footer_desc">Copyright &copy;  2021 {{opsi('website')}}. All Rights Reserved.</p>
+                <p class="footer_desc">Copyright &copy;  {{opsi('website')}}. All Rights Reserved.</p>
             </div>
             
             <div class="col-md-4">

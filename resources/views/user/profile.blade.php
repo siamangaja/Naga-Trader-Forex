@@ -39,7 +39,7 @@
                 <div class="row mb-6">
                     <label class="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="Name" value="{{ $d->name }}" required/>
+                        <input type="text" name="name" class="form-control" placeholder="Name" value="{{ $d->name }}" required/>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
                         <span class="required">Email</span>
                     </label>
                     <div class="col-lg-8 fv-row">
-                        <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="Email" value="{{ $d->email }}" required readonly/>
+                        <input type="email" name="email" class="form-control" placeholder="Email" value="{{ $d->email }}" required readonly/>
                     </div>
                 </div>
 
@@ -57,21 +57,21 @@
                         <span class="required">Phone</span>
                     </label>
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone" value="{{ $d->phone }}" required />
+                        <input type="text" name="phone" class="form-control" placeholder="Phone" value="{{ $d->phone }}" required />
                     </div>
                 </div>
 
                 <div class="row mb-6">
                     <label class="col-lg-4 col-form-label fw-bold fs-6">Address</label>
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="Address" value="{{ $d->address }}" />
+                        <input type="text" name="address" class="form-control" placeholder="Address" value="{{ $d->address }}" />
                     </div>
                 </div>
 
                 <div class="row mb-6">
                     <label class="col-lg-4 col-form-label fw-bold fs-6">Country</label>
                     <div class="col-lg-8 fv-row">
-                        <select id="country" name="country" class="form-control form-control-lg form-control-solid">
+                        <select id="country" name="country" class="form-control">
                         @if ($d->country == '')
                             <option value="" selected="selected">- Please Select -</option>
                         @else
@@ -314,7 +314,7 @@
                 <div class="row mb-6">
                     <label class="col-lg-4 col-form-label fw-bold fs-6">Bitcoin Address</label>
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="bitcoin" class="form-control form-control-lg form-control-solid" placeholder="Bitcoin Address" value="{{ $d->bitcoin }}" />
+                        <input type="text" name="bitcoin" class="form-control" placeholder="Bitcoin Address" value="{{ $d->bitcoin }}" />
                     </div>
                 </div>
 

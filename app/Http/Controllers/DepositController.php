@@ -93,9 +93,35 @@ class DepositController extends Controller
         return redirect()->back()->with("success","Password Anda sukses diganti...");
     }
 
+    public function avatarUser () {
+        $data = User::where('id', auth()->id())->first();
+        $title = 'Profile Image';
+        return view('user.avatar-edit', [
+            'data' => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function avatarUserSave (Request $request) {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
+        ]);
+        $file = $request->file('image');
+        $imageName1 = time().'-'.$file->getClientOriginalName();
+        $imageName2 = Str::lower($imageName1);
+        $imageName3 = preg_replace('/\s+/', '', $imageName2);
+        $img = $request->image->move(public_path('storage/images'), $imageName3);
+  
+        $update = User::where('id', auth()->id())
+            ->update([
+                'avatar' => $imageName3,
+            ]);
+        return redirect ('user/profile/image')->with("success","Data updated successfully...");
+    }
+
     public function depositUser() {
         $uid = auth()->id();
-        $title = 'Deposit';
+        $title = 'Add Balance';
         $data = Deposit::orderBy('id', 'desc')->where('user_id', $uid)->paginate(20);
         return view('user.deposit-index', [
             'data'  => $data,
@@ -103,13 +129,12 @@ class DepositController extends Controller
         ]);
     }
 
-
     public function depositAdd() {
-        $title = 'Setor Deposit';
+        $title = 'Add Balance';
         $data = BankAdmin::where('status', 1)->get();
         return view('user.deposit-add', [
             'title' => $title,
-            'data' => $data,
+            'data'  => $data,
         ]);
     }
 
@@ -121,7 +146,7 @@ class DepositController extends Controller
         $NewDeposit->bank_number    = $bank->number;
         $NewDeposit->bank_account   = $bank->account_name;
         $NewDeposit->amount         = $request->amount;
-        $NewDeposit->fee            = rand(12, 57) / 100;
+        $NewDeposit->fee            = 0; //rand(12, 57) / 100;
         $NewDeposit->total          = $NewDeposit->amount+$NewDeposit->fee;
         $NewDeposit->ref            = strtoupper(substr(md5(microtime()), 0, 12));
         $NewDeposit->save();
@@ -129,7 +154,7 @@ class DepositController extends Controller
     }
 
     public function depositDetail ($ref) {
-        $title = 'Setor Deposit';
+        $title = 'Add Balance';
         $d = Deposit::where('ref', $ref)->first();
 
         if ($d == null) {
@@ -253,7 +278,7 @@ class DepositController extends Controller
 
     public function WalletUser() {
         $uid = auth()->id();
-        $title = 'Wallet';
+        $title = 'Cash Balance';
         $databalance = Wallet::orderBy('id', 'desc')->where('user_id', $uid)->take(1)->get();
         $data = Wallet::orderBy('id', 'desc')->where('user_id', $uid)->paginate(20);
 
@@ -295,7 +320,7 @@ class DepositController extends Controller
 
     public function TransactionsIndex() {
         $uid = auth()->id();
-        $title = 'Transactions';
+        $title = 'Dashboard';
         $data = Transactions::orderBy('id', 'desc')->where('user_id', $uid)->paginate(20);
         return view('user.transactions-index', [
             'data' => $data,
@@ -303,204 +328,157 @@ class DepositController extends Controller
         ]);
     }
 
-    public function Order ($amount) {
-        $url = "https://cex.io/api/last_price/BTC/USD";
-        $API_data = json_decode(file_get_contents($url), true);
-        $price = $API_data['lprice'];
-        $NewOrder = new Transactions;
-        $NewOrder->trx_id   = strtoupper(substr(md5(microtime()), 0, 12));
-        $NewOrder->user_id  = auth()->id();
-        $NewOrder->type     = 'buy';
-        $NewOrder->symbol   = 'btcusd';
-        $NewOrder->price    = $price;
-        $NewOrder->amount   = $amount;
-        $NewOrder->fee      = 0;
-        $NewOrder->total    = $NewOrder->price*$NewOrder->amount;
-        $NewOrder->notes    = '';
-        $NewOrder->status   = 1;
+    // public function Order ($amount) {
+    //     $url = "https://cex.io/api/last_price/BTC/USD";
+    //     $API_data = json_decode(file_get_contents($url), true);
+    //     $price = $API_data['lprice'];
+    //     $NewOrder = new Transactions;
+    //     $NewOrder->trx_id   = strtoupper(substr(md5(microtime()), 0, 12));
+    //     $NewOrder->user_id  = auth()->id();
+    //     $NewOrder->type     = 'buy';
+    //     $NewOrder->symbol   = 'btcusd';
+    //     $NewOrder->price    = $price;
+    //     $NewOrder->amount   = $amount;
+    //     $NewOrder->fee      = 0;
+    //     $NewOrder->total    = $NewOrder->price*$NewOrder->amount;
+    //     $NewOrder->notes    = '';
+    //     $NewOrder->status   = 1;
 
-        $VirtualBalance = VirtualBalance::orderBy('id', 'desc')->where('user_id', auth()->id())->take(1)->get();
+    //     $VirtualBalance = VirtualBalance::orderBy('id', 'desc')->where('user_id', auth()->id())->take(1)->get();
 
-        if ($VirtualBalance) {
-            $vbalance = 0;
-        }
+    //     if ($VirtualBalance) {
+    //         $vbalance = 0;
+    //     }
 
-        foreach($VirtualBalance as $b) {
-            $vbalance = $b->balance;
-        }
+    //     foreach($VirtualBalance as $b) {
+    //         $vbalance = $b->balance;
+    //     }
 
         
-        if ($vbalance < $NewOrder->total) {
-            return redirect ('user/transactions')->with("error","Insufficient balance...");
-        }
+    //     if ($vbalance < $NewOrder->total) {
+    //         return redirect ('user/transactions')->with("error","Insufficient balance...");
+    //     }
 
+    //     $NewOrder->save();
+
+    //     // Simpan Data ke Virtual Balance
+    //     $NewVirtualBalance = new VirtualBalance;
+    //     $NewVirtualBalance->user_id = auth()->id();
+    //     $NewVirtualBalance->type    = 'debet';
+    //     $NewVirtualBalance->amount  = $NewOrder->total;
+    //     $NewVirtualBalance->balance = $vbalance-$NewOrder->total;
+    //     $NewVirtualBalance->notes   = 'Order: '.$NewOrder->trx_id;
+    //     $NewVirtualBalance->save();
+
+    //     return redirect ('user/transactions');
+    // }
+
+    public function Buy (Request $request) {
+        $market = $request->market;
+        $time = $request->time;
+        $amount = $request->amount;
+        //dd($market.'/'.$time.'/'.$amount);
+        //$url = "https://cex.io/api/last_price/BTC/USD";
+        //$price = $API_data['lprice'];
+        $url = "https://www.bitstamp.net/api/v2/ticker/".$market;
+        $API_data = json_decode(file_get_contents($url), true);
+        $price = $API_data['last'];
+        $NewOrder = new Transactions;
+        $NewOrder->user_id      = auth()->id();
+        $NewOrder->trx_id       = strtoupper(substr(md5(microtime()), 0, 12));
+        $NewOrder->market       = $market;
+        $NewOrder->amount       = $amount;
+        $NewOrder->type         = 'buy '.$time.' seconds';
+        $NewOrder->date_start   = Carbon::now();
+        $NewOrder->date_end     = Carbon::now()->addSeconds($time);
+        $NewOrder->rate_stake   = $price;
+        $NewOrder->rate_end     = NULL;
+        $NewOrder->status       = 0;
+        $NewOrder->win_lose     = 0;
         $NewOrder->save();
-
-        // Simpan Data ke Virtual Balance
-        $NewVirtualBalance = new VirtualBalance;
-        $NewVirtualBalance->user_id = auth()->id();
-        $NewVirtualBalance->type    = 'debet';
-        $NewVirtualBalance->amount  = $NewOrder->total;
-        $NewVirtualBalance->balance = $vbalance-$NewOrder->total;
-        $NewVirtualBalance->notes   = 'Order: '.$NewOrder->trx_id;
-        $NewVirtualBalance->save();
-
         return redirect ('user/transactions');
     }
 
+    public function CheckPrice (Request $request) {
+        $count = Transactions::where([
+            ['status', 0],
+            ['rate_end', NULL],
+            ['market', $request->market],
+        ])->count();
 
-    // public function IndexUsers() {
-    //     $title = 'Data User';
-    //     $data = User::orderBy('id', 'desc')->paginate(20);
-    //     return view('admin.users-index', [
-    //         'data'  => $data,
-    //         'title' => $title,
-    //     ]);
-    // }
+        $trxs = Transactions::where([
+            ['status', 0],
+            ['rate_end', NULL],
+            ['market', $request->market],
+        ])->get();
 
-    // public function DeleteUsers (Request $request) {
-    //     $Users = User::where('id', $request->id)->get();
-    //     if (!$Users) {
-    //         return redirect ('admin/users')->with("error","Terjadi kesalahan...");
-    //     }
-    //     else{
-    //         $Delete = User::where('id', $request->id)->delete();
-    //         return redirect ('admin/users')->with("success","Data berhasil dihapus...");
-    //     }
-    // }
+        $url = "https://www.bitstamp.net/api/v2/ticker/".$request->market;
+        $API_data = json_decode(file_get_contents($url), true);
+        $lastprice = $API_data['last'];
 
-    // public function EditUsers (Request $request) {
-    //     $title = 'Edit User';
-    //     $d = User::where('id', $request->id)->first();
-    //     return view('admin.users-edit', [
-    //         'd'     => $d,
-    //         'title' => $title,
-    //     ]);
-    // }
+        if ($count == 0) {
+            return 'No transactions found...';
+        }
 
-    // public function SaveUsers (Request $request) {
-    //     $update = User::where('id', $request->id)
-    //     ->update([
-    //         'name'      => $request->name,
-    //         'email'     => $request->email,
-    //         'phone'     => $request->phone,
-    //         'address'   => $request->address,
-    //     ]);
-    //     return redirect ('admin/users')->with("success","Data berhasil diperbarui...");
-    // }
+        foreach ($trxs as $trx) {
+                $current = Carbon::now()->toDateTimeString();
+                $newdate = $trx->date_end;
+        }
 
-    // public function IndexDeposit() {
-    //     $title = 'Data Deposit';
-    //     $data = Deposit::orderBy('id', 'desc')->with('User')->paginate(20);
-    //     return view('admin.deposit-index', [
-    //         'data'  => $data,
-    //         'title' => $title,
-    //     ]);
-    // }
+        if ($current > $newdate) {
 
-    // public function DeleteDeposit (Request $request) {
-    //     $Deposit = Deposit::where('ref', $request->ref)->get();
-    //     if (!$Deposit) {
-    //         return redirect ('admin/deposit')->with("error","Terjadi kesalahan...");
-    //     }
-    //     else{
-    //         $Delete = Deposit::where('ref', $request->ref)->delete();
-    //         return redirect ('admin/deposit')->with("success","Data berhasil dihapus...");
-    //     }
-    // }
+            $update = Transactions::where('id', $trx->id)
+                ->update(['rate_end' => $lastprice]);
 
-    // public function ValidateDeposit (Request $request) {
-    //     $Deposit = Deposit::where('ref', $request->ref)->first();
-    //     if (!$Deposit) {
-    //         return redirect ('admin/deposit')->with("error","Terjadi kesalahan...");
-    //     }
-    //     else {
-    //         $update = Deposit::where('ref', $Deposit->ref)
-    //         ->update([
-    //             'status' => 1
-    //         ]);
+                //dd($lastprice.' | '.$trx->rate_stake);
 
-    //         $databalance = Wallet::orderBy('id', 'desc')->where('user_id', $Deposit->user_id)->take(1)->get();
+            if ($lastprice > $trx->rate_stake) {
+                $update = Transactions::where('id', $trx->id)
+                    ->update([
+                    'status'    => 1,
+                    'win_lose'  => $trx->amount*18000,
+                ]);
+            } else {
+                $update = Transactions::where('id', $trx->id)
+                    ->update([
+                    'status'    => 2,
+                    'win_lose'  => $trx->amount,
+                ]);
+            }
+            return 'Transactions updated...';
+        }
 
-    //         if ($databalance) {
-    //             $balance = 0;
-    //         }
+    }
 
-    //         foreach($databalance as $b) {
-    //             $balance = $b->balance;
-    //         }
+    public function Coba (Request $request) {
+        switch($request->buttonSubmit) {
+            case 'buy': 
+                $market = $request->market;
+                $time = $request->time;
+                $amount = $request->amount;
+                $url = "https://www.bitstamp.net/api/v2/ticker/".$market;
+                $API_data = json_decode(file_get_contents($url), true);
+                $price = $API_data['last'];
+                $NewOrder = new Transactions;
+                $NewOrder->user_id      = auth()->id();
+                $NewOrder->trx_id       = strtoupper(substr(md5(microtime()), 0, 12));
+                $NewOrder->market       = $market;
+                $NewOrder->amount       = $amount;
+                $NewOrder->type         = 'buy '.$time.' seconds';
+                $NewOrder->date_start   = Carbon::now();
+                $NewOrder->date_end     = Carbon::now()->addSeconds($time);
+                $NewOrder->rate_stake   = $price;
+                $NewOrder->rate_end     = NULL;
+                $NewOrder->status       = 0;
+                $NewOrder->win_lose     = 0;
+                $NewOrder->save();
+                return redirect ('user');
+            break;
 
-    //         //Tambahkan balance ke User
-    //         $NewWallet = new Wallet;
-    //         $NewWallet->user_id = $Deposit->user_id;
-    //         $NewWallet->type    = 'credit';
-    //         $NewWallet->amount  = $Deposit->total;
-    //         $NewWallet->balance = $balance+$Deposit->total;
-    //         $NewWallet->notes   = 'Deposit: '.$Deposit->ref;
-    //         $NewWallet->save();
-    //         return redirect ('admin/deposit')->with("success","Data berhasil divalidasi...");
-    //     }
-    // }
-
-    // public function IndexLogs() {
-    //     $title = 'Logs Balance';
-    //     $data = Wallet::orderBy('id', 'desc')->with('User')->paginate(20);
-    //     return view('admin.logs-index', [
-    //         'data'  => $data,
-    //         'title' => $title,
-    //     ]);
-    // }
-
-    // public function IndexWithdraw() {
-    //     $title = 'Data Withdraw';
-    //     $data = Withdraw::orderBy('id', 'desc')->with('User')->paginate(20);
-    //     return view('admin.withdraw-index', [
-    //         'data'  => $data,
-    //         'title' => $title,
-    //     ]);
-    // }
-
-    // public function ValidateWithdraw (Request $request) {
-    //     $Withdraw = Withdraw::where('ref', $request->ref)->first();
-    //     if (!$Withdraw) {
-    //         return redirect ('admin/withdraw')->with("error","Terjadi kesalahan...");
-    //     }
-    //     else {
-    //         $update = Withdraw::where('ref', $Withdraw->ref)
-    //         ->update([
-    //             'status' => 1
-    //         ]);
-    //         return redirect ('admin/withdraw')->with("success","Data berhasil divalidasi...");
-    //     }
-    // }
-
-    // public function IndexAdminBank() {
-    //     $title = 'Pengaturan Rekening Bank';
-    //     $data = BankAdmin::get();
-    //     return view('admin.bank-index', [
-    //         'data'  => $data,
-    //         'title' => $title,
-    //     ]);
-    // }
-
-    // public function EditAdminBank (Request $request) {
-    //     $title = 'Edit Rekening Bank';
-    //     $d = BankAdmin::where('id', $request->id)->first();
-    //     return view('admin.bank-edit', [
-    //         'd'     => $d,
-    //         'title' => $title,
-    //     ]);
-    // }
-
-    // public function SaveAdminBank (Request $request) {
-    //     $update = BankAdmin::where('id', $request->id)
-    //     ->update([
-    //         'bank'          => $request->bank,
-    //         'number'        => $request->number,
-    //         'account_name'  => $request->account_name,
-    //         'status'        => $request->status,
-    //     ]);
-    //     return redirect ('admin/bank')->with("success","Data berhasil diperbarui...");
-    // }
+            case 'sell': 
+                return 'sell';
+            break;
+        }
+    }
 
 }

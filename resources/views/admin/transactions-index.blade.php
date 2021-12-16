@@ -33,11 +33,11 @@
                             <th class="min-w-150px">Timestamp</th>
                             <th class="min-w-150px">Trx ID</th>
                             <th class="min-w-50px">User</th>
+                            <th class="min-w-50px">Market</th>
                             <th class="min-w-50px">Type</th>
-                            <th class="min-w-50px">Symbol</th>
-                            <th class="min-w-50px">Price</th>
+                            <th class="min-w-50px">Stake</th>
                             <th class="min-w-50px">Qty</th>
-                            <th class="min-w-50px">Total</th>
+                            <th class="min-w-50px">End</th>
                             <th class="min-w-50px">Status</th>
                         </tr>
                     </thead>
@@ -49,17 +49,17 @@
                             <td>{{ $d->created_at }}</td>
                             <td>{{ $d->trx_id }}</td>
                             <td>{{ $d->user->name }}</td>
+                            <td>{{ strtoupper($d->market) }}</td>
                             <td>
-                                @if ($d->type == 'buy')
+                                @if ($d->type == 'buy 30 seconds')
                                     <span class="badge badge-light-success fw-bolder px-4 py-3">Buy</span>
-                                @elseif ($d->type == 'sell')
+                                @elseif ($d->type == 'buy 60 seconds')
                                    <span class="badge badge-light-danger fw-bolder px-4 py-3">Sell</span>
                                 @endif
                             </td>
-                            <td>{{ strtoupper($d->symbol) }}</td>
-                            <td>{{ $d->price }}</td>
+                            <td>{{ $d->rate_stake }}</td>
                             <td>{{ $d->amount }}</td>
-                            <td>{{ $d->total }}</td>
+                            <td>{{ $d->rate_end }}</td>
                             <td>
                                 @if ($d->status == 0)
                                     <span class="badge badge-light-warning fw-bolder px-4 py-3">Pending</span>

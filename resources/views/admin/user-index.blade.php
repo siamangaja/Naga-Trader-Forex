@@ -132,7 +132,6 @@
     </div>
     <!--end::Modal-->
 
-
     </div>
     <!--end::Content-->
 </div>
@@ -144,9 +143,8 @@
 <!--end::Post-->
 @stop
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="//unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 
 $(document).ready(function () {
@@ -191,7 +189,6 @@ $('body').on('click', '#UserEdit', function (event) {
     var id = $(this).data('id');
     console.log(id)
     $.get('admin/user/' + id + '/edit', function (data) {
-         //$('#userCrudModal').html("Edit category");
          $('#submit').val("Edit category");
          $('#practice_modal').modal('show');
          $('#id').val(data.data.id);

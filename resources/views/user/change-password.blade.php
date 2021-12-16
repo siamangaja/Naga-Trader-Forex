@@ -43,7 +43,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="Username" value="{{ $d->username }}" readonly/>
+                        <input type="text" name="name" class="form-control" placeholder="Username" value="{{ $d->username }}" readonly/>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -55,7 +55,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="password" name="current-password" class="form-control form-control-lg form-control-solid" value="" required/>
+                        <input type="password" name="current-password" class="form-control" value="" required/>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -67,7 +67,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="password" name="new-password" class="form-control form-control-lg form-control-solid" value="" required/>
+                        <input type="password" name="new-password" class="form-control" value="" required/>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -78,7 +78,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="password" name="new-password-confirm" class="form-control form-control-lg form-control-solid" value="" required/>
+                        <input type="password" name="new-password-confirm" class="form-control" value="" required/>
                     </div>
                     <!--end::Col-->
                 </div>

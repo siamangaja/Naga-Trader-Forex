@@ -85,24 +85,12 @@ class PagesController extends Controller
         return redirect ('contact')->with("success","Form submitted successfully...");
     }
 
-    public function BTC () {
-        $url = "https://cex.io/api/last_price/BTC/USD";
-        $json = json_decode(file_get_contents($url), true);
-        dd($json['lprice']);
-    }
-
     public function Indodax () {
         $harga = Indodax::getTicker('btcidr');
         dd($harga);
         // $indodax = "https://indodax.com/api/ticker/btcidr";
         // $data = json_decode(file_get_contents($indodax), true);
         // dd($data['ticker']['last']);
-    }
-
-    public function Coba () {
-        //$rand = strtoupper(substr(md5(microtime()), 0, 12));
-        $rand = rand(12, 57) / 100;
-        dd($rand);
     }
 
 }

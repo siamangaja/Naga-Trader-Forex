@@ -137,6 +137,14 @@
                                     <!--end::Breadcrumb-->
                                 </div>
                                 <!--end::Page title-->
+
+                                <div class="d-flex align-items-center">
+                                    <h5>Balance: ${{getBalance()}} (Demo)</h5>&nbsp;
+                                    <div class="d-flex">
+                                        <a href="{{ route('user.profile') }}"><img src="storage/images/{{ getAvatar() }}" width="30" style="border-radius: 200px;"></a>
+                                    </div>
+                                </div>
+
                             </div>
                             <!--end::Toolbar-->
                         </div>
@@ -160,19 +168,6 @@
                                 <a href="/" class="text-gray-800 text-hover-primary">{{opsi('website')}}</a>
                             </div>
                             <!--end::Copyright-->
-                            <!--begin::Menu-->
-                            <!-- <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
-                                <li class="menu-item">
-                                    <a href="#" class="menu-link px-2">About</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="#" class="menu-link px-2">Support</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="#" class="menu-link px-2">Purchase</a>
-                                </li>
-                            </ul> -->
-                            <!--end::Menu-->
                         </div>
                         <!--end::Container-->
                     </div>
@@ -202,6 +197,7 @@
         <script src="{{ asset('js/plugins.bundle.js') }}"></script>
         <script src="{{ asset('js/scripts.bundle.js') }}"></script>
         <script src="{{ asset('js/datatables.bundle.js') }}"></script>
+        <script src="{{ asset('js/view.js') }}"></script>
         @stack('scripts')
     </body>
     <!--end::Body-->

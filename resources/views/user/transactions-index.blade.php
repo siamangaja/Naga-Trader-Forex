@@ -8,20 +8,12 @@
 <div id="kt_content_container" class="container-xxl">
 <!--begin::Basic info-->
 <div class="card mb-5 mb-xl-10">
-    <!--begin::Card header-->
-    <div class="card-header border-0">
-        <!--begin::Card title-->
-        <div class="card-title m-0">
-            <h3 class="fw-bolder m-0">{{$title}}</h3>
-        </div>
-        <!--end::Card title-->
-    </div>
-    <!--begin::Card header-->
     <!--begin::Content-->
     <div id="kt_account_profile_details" class="collapse show">
 
         <!--begin::Card body-->
         <div class="card-body pt-0">
+            <br>
 
             @if (session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -34,6 +26,63 @@
             </div>
             @endif
 
+            <table>
+                <form id="" class="form" action="{{url('user/coba')}}" method="POST">
+                @csrf
+                <select id="market" name="market" class="form-control" required="required">
+                    <option value="btcusd" selected="selected">BTC / USD</option>
+                </select>
+
+                <br>
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                  <div id="tradingview_04a74"></div>
+                  <script type="text/javascript" src="//s3.tradingview.com/tv.js"></script>
+                  <script type="text/javascript">
+                  new TradingView.widget(
+                  {
+                  "width": 850,
+                  "height": 600,
+                  "symbol": "COINBASE:BTCUSD",
+                  "interval": "1",
+                  "timezone": "Asia/Jakarta",
+                  "theme": "light",
+                  "style": "1",
+                  "locale": "en",
+                  "toolbar_bg": "#f1f3f6",
+                  "enable_publishing": false,
+                  "container_id": "tradingview_04a74"
+                }
+                  );
+                  </script>
+                </div>
+                <!-- TradingView Widget END -->
+                <br>
+
+                <th class="min-w-10px">
+                    <input type="number" id="amount" name="amount" class="form-control" placeholder="USD 1" value="" required/>
+                </th>
+                <th class="min-w-10px">
+                    <select id="time" name="time" class="form-control" required="required">
+                        <option value="" selected="selected">- Select -</option>
+                        <option value="30">30 Seconds</option>
+                        <option value="60">1 Minute</option>
+                        <option value="180">3 Minutes</option>
+                        <option value="300">5 Minutes</option>
+                        <option value="1800">30 Minutes</option>
+                        <option value="3600">1 Hour</option>
+                    </select>
+                </th>
+                <!-- <th class="min-w-50px"><a href="{{url('user/trx/buy/btcusd/30/1')}}" class="btn btn-success">BUY 180%</a></th>
+                <th class="min-w-50px"><a href="{{url('user/trx/sell/btcusd/30/1')}}" class="btn btn-danger">SELL 180%</a></th> -->
+                <th class="min-w-50px"><button type="submit" class="btn btn-success" id="buy" name="buttonSubmit" value="buy">BUY 180%</button></th>
+                <th class="min-w-50px"><button type="submit" class="btn btn-danger" id="sell" name="buttonSubmit" value="sell">SELL 180%</button></th>
+                </form>
+            </table>
+
+            <br><br>
+            <h3>History</h3>
+
             <!--begin::Table container-->
             <div class="table-responsive">
                 <!--begin::Table-->
@@ -41,11 +90,12 @@
                     <!--begin::Head-->
                     <thead class="fs-7 text-gray-400 text-uppercase">
                         <tr>
-                            <th class="min-w-150px">Timestamp</th>
                             <th class="min-w-100px">Trx ID</th>
-                            <th class="min-w-50px">Type</th>
                             <th class="min-w-50px">Market</th>
+                            <th class="min-w-50px">Type</th>
+                            <th class="min-w-50px">Rate Stake</th>
                             <th class="min-w-50px">Amount</th>
+                            <th class="min-w-50px">Rate End</th>
                             <th class="min-w-50px">Status</th>
                         </tr>
                     </thead>
@@ -54,24 +104,21 @@
                     <tbody class="fs-6">
                         @forelse ($data as $d)
                         <tr>
-                            <td>{{ $d->created_at }}</td>
                             <td>{{ $d->trx_id }}</td>
-                            <td>
-                                @if ($d->type == 'buy')
-                                    <span class="badge badge-light-success fw-bolder px-4 py-3">Buy</span>
-                                @elseif ($d->type == 'sell')
-                                   <span class="badge badge-light-danger fw-bolder px-4 py-3">Sell</span>
-                                @endif
-                            </td>
                             <td>{{ strtoupper($d->market) }}</td>
-                            <td>{{ $d->amount }}</td>
+                            <td>
+                                <span class="badge badge-success fw-bolder px-4 py-3">{{ strtoupper($d->type) }}</span>
+                            </td>
+                            <td>{{ $d->rate_stake }}</td>
+                            <td>USD {{ $d->amount }}</td>
+                            <td>{{ $d->rate_end }}</td>
                             <td>
                                 @if ($d->status == 0)
-                                    <span class="badge badge-light-warning fw-bolder px-4 py-3">Pending</span>
+                                    <span class="badge badge-warning fw-bolder px-4 py-3">WAIT</span>
                                 @elseif ($d->status == 1)
-                                   <span class="badge badge-light-success fw-bolder px-4 py-3">Success</span>
+                                   <span class="badge badge-success fw-bolder px-4 py-3">W I N</span>
                                 @elseif ($d->status == 2)
-                                   <span class="badge badge-light-danger fw-bolder px-4 py-3">Failed</span>
+                                   <span class="badge badge-danger fw-bolder px-4 py-3">LOSE</span>
                                 @endif
                             </td>
                         </tr>
@@ -86,45 +133,12 @@
                     <!--end::Body-->
                 </table>
                 <!--end::Table-->
-
-                <!-- <a href="{{url('user/order/2000')}}" class="btn btn-primary btn-active-light-dark">Order Now</a> -->
-
             </div>
             <!--end::Table container-->
 
             <div class="d-flex justify-content-start">
                 {{ $data->links() }}
             </div>
-
-            <table>
-                <th class="min-w-50px"><a href="{{url('user/order/2000')}}" class="btn btn-success">BUY 180%</a></th>
-                <th class="min-w-50px"><a href="{{url('user/order/2000')}}" class="btn btn-danger">SELL 180%</a></th>
-            </table>
-            
-            <br><br>
-            <!-- TradingView Widget BEGIN -->
-            <div class="tradingview-widget-container">
-              <div id="tradingview_04a74"></div>
-              <script type="text/javascript" src="//s3.tradingview.com/tv.js"></script>
-              <script type="text/javascript">
-              new TradingView.widget(
-              {
-              "width": 850,
-              "height": 600,
-              "symbol": "COINBASE:BTCUSD",
-              "interval": "D",
-              "timezone": "Asia/Jakarta",
-              "theme": "light",
-              "style": "1",
-              "locale": "en",
-              "toolbar_bg": "#f1f3f6",
-              "enable_publishing": false,
-              "container_id": "tradingview_04a74"
-            }
-              );
-              </script>
-            </div>
-            <!-- TradingView Widget END -->
 
         </div>
         <!--end::Card body-->

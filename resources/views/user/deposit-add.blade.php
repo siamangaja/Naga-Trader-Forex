@@ -67,7 +67,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <select class="form-control form-control-lg form-control-solid" id="bank" name="bank" required>
+                        <select class="form-control" id="bank" name="bank" required>
                             <option value="" selected disabled>-Pilih Bank-</option>
                             @forelse ($data as $d)
                                 <option value="{{$d->bank}}">{{$d->bank}}</option>
@@ -87,7 +87,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="number" name="amount" class="form-control form-control-lg form-control-solid" placeholder="" value="" required/>
+                        <input type="number" name="amount" class="form-control" placeholder="" value="" required/>
                     </div>
                     <!--end::Col-->
                 </div>

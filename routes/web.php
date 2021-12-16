@@ -4,14 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\Auth\AdminAuthController;
-use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DepositController;
 
-Route::get('/coba', [PagesController::class,'Coba'])->name('coba');
-
-Route::get('/btc', [PagesController::class,'BTC'])->name('BTC');
 Route::get('/indodax', [PagesController::class,'Indodax'])->name('Indodax');
 Route::get('/', [PagesController::class,'frontpage'])->name('frontpage');
 
@@ -29,12 +25,6 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/user/{id}/edit', [AdminController::class,'userEdit']);
     Route::post('/admin/user', [AdminController::class,'userUpdate'])->name('user.update');
     Route::get('/admin/user/{id}/delete', [AdminController::class,'userDelete'])->name('user.delete');
-    // Route::get('/admin/news', [AdminController::class,'newsIndex'])->name('news.index');
-    // Route::get('/admin/news/add', [AdminController::class,'newsAdd'])->name('news.add');
-    // Route::post('/admin/news/add', [AdminController::class,'newsStore'])->name('news.store');
-    // Route::get('/admin/news/{id}/edit', [AdminController::class,'newsEdit'])->name('news.edit');
-    // Route::post('/admin/news/{id}/edit', [AdminController::class,'newsUpdate'])->name('news.update');
-    // Route::get('/admin/news/{id}/delete', [AdminController::class,'newsDelete'])->name('news.delete');
     Route::get('/admin/features', [AdminController::class,'featuresIndex'])->name('features.index');
     Route::get('/admin/features/add', [AdminController::class,'featuresAdd'])->name('features.add');
     Route::post('/admin/features/add', [AdminController::class,'featuresStore'])->name('features.store');
@@ -81,10 +71,13 @@ Route::group(['middleware' => ['auth:admin']], function () {
 
 // User
 Route::group(['middleware' => ['auth:user']], function () {
-    Route::get('/user', [DepositController::class,'dashboardUser'])->name('user.dashboard');
+    //Route::get('/user', [DepositController::class,'dashboardUser'])->name('user.dashboard');
+    Route::get('/user', [DepositController::class,'TransactionsIndex'])->name('user.dashboard');
     Route::get('/user/profile', [DepositController::class,'profileUser'])->name('user.profile');
     Route::post('/user/profile', [DepositController::class,'saveprofileUser']);
     Route::get('/user/change-password', [DepositController::class,'ChangePassword'])->name('user.change-password');
+    Route::get('/user/profile/image', [DepositController::class,'avatarUser'])->name('user.change-avatar');
+    Route::post('/user/profile/image', [DepositController::class,'avatarUserSave']);
     Route::post('/user/change-password', [DepositController::class,'SavePassword']);
     Route::get('/user/deposit', [DepositController::class,'depositUser'])->name('user.deposit');
     Route::get('/user/deposit/add', [DepositController::class,'depositAdd'])->name('user.deposit');
@@ -98,8 +91,11 @@ Route::group(['middleware' => ['auth:user']], function () {
     Route::post('/user/bank/store', [DepositController::class,'StoreBank']);
     Route::get('/user/wallet', [DepositController::class,'WalletUser'])->name('user.wallet');
     Route::get('/user/virtual-balance', [DepositController::class,'VirtualBalanceUser'])->name('user.virtual-balance');
-    Route::get('/user/transactions', [DepositController::class,'TransactionsIndex'])->name('user.transactions-index');
-    Route::get('/user/order/{amount}', [DepositController::class,'Order'])->name('user.order');
+    //Route::get('/user/transactions', [DepositController::class,'TransactionsIndex'])->name('user.transactions-index');
+    //Route::get('/user/order/{amount}', [DepositController::class,'Order'])->name('user.order');
+    Route::post('/user/coba', [DepositController::class,'Coba']);
+    Route::get('/user/trx/buy/{market}/{time}/{amount}', [DepositController::class,'Buy']);
+    Route::get('/user/trx/check/{market}', [DepositController::class,'CheckPrice']);
 });
 
 Route::get('/login', [UserLoginController::class,'showLoginForm'])->name('login');
@@ -107,8 +103,6 @@ Route::post('/login', [UserLoginController::class,'login'])->name('user.login.su
 Route::get('/logout', [UserLoginController::class,'logout'])->name('logout');
 Route::get('/register', [UserRegisterController::class,'showRegisterForm'])->name('user.register');
 Route::post('/register', [UserRegisterController::class,'register'])->name('user.register.submit');
-// Route::get('/news', [NewsController::class,'index'])->name('news');
-// Route::get('/news/{slug}', [NewsController::class,'details']);
 Route::get('contact', [PagesController::class,'contact'])->name('contact');
 Route::post('contact', [PagesController::class,'submitContact'])->name('submit.contact');
 Route::get('{slug}', [PagesController::class,'details']);

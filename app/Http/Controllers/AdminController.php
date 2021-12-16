@@ -11,7 +11,6 @@ use Hash;
 use Route;
 use App\Models\Admin;
 use App\Models\User;
-use App\Models\News;
 use App\Models\Features;
 use App\Models\Testimonials;
 use App\Models\Prices;
@@ -105,76 +104,6 @@ class AdminController extends Controller
         else{
             $Delete = User::where('id', $request->id)->delete();
             return redirect ('admin/users')->with("success","Data deleted successfully...");
-        }
-    }
-
-    public function newsIndex () {
-        $title = 'News';
-        $data = News::orderBy('id', 'desc')->paginate(20);
-        return view('admin.news-index', [
-            'data'  => $data,
-            'title' => $title,
-        ]);
-    }
-
-    public function newsAdd () {
-        $title = 'Add News';
-        return view('admin.news-add', [
-            'title' => $title,
-        ]);
-    }
-
-    public function newsStore (Request $request) {
-        $request->validate([
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
-        ]);
-        $file = $request->file('thumbnail');
-        $imageName1 = time().'-'.$file->getClientOriginalName();
-        $imageName2 = Str::lower($imageName1);
-        $imageName3 = preg_replace('/\s+/', '', $imageName2);
-        $img = $request->thumbnail->move(public_path('storage/images'), $imageName3);
-        $slug = Str::lower($string = str_replace(' ', '-', $request->title));
-        $slug = preg_replace('/[^A-Za-z0-9\-]/', '', $slug);
-
-        $News = new News;
-        $News->title        = $request->title;
-        $News->slug         = $slug;
-        $News->thumbnail    = $imageName3;
-        $News->content      = $request->content;
-        $News->status       = $request->status;
-        $News->save();
-        return redirect ('admin/news')->with("success","Data created successfully...");
-    }
-
-
-    public function newsEdit ($id) {
-        $data = News::where('id',$id)->first();
-        return view('admin.news-edit', [
-            'data' => $data,
-            'title' => 'Edit News',
-        ]);
-    }
-
-    public function newsUpdate (Request $request)
-    {
-        $update = News::where('id',$request->id)
-            ->update([
-                'title'     => $request->title,
-                'content'   => $request->content,
-                //'thumbnail' => $request->thumbnail,
-                'status'    => $request->status,
-            ]);
-        return redirect ('admin/news')->with("success","Data updated successfully...");
-    }
-
-    public function newsDelete (Request $request) {
-        $News = News::where('id', $request->id)->get();
-        if (!$News) {
-            return redirect ('admin/news')->with("error","Ups! Something wrong...");
-        }
-        else{
-            $Delete = News::where('id', $request->id)->delete();
-            return redirect ('admin/news')->with("success","Data deleted successfully...");
         }
     }
 

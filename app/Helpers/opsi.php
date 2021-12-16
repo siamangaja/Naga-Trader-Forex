@@ -1,7 +1,7 @@
 <?php
-	function opsi ($pilihan) {
-	$data = DB::table('options')->where('name', $pilihan)->first();
-	return $data->value;
+function opsi ($pilihan) {
+  $data = DB::table('options')->where('name', $pilihan)->first();
+  return $data->value;
 }
 
 function set_active($uri, $output = 'active')
@@ -17,4 +17,14 @@ function set_active($uri, $output = 'active')
      return $output;
    }
  }
+}
+
+function getBalance () {
+  $data = DB::table('virtual_balance')->where('user_id', auth()->id())->orderBy('id', 'desc')->first();
+  return $data->balance;
+}
+
+function getAvatar () {
+  $v = DB::table('users')->where('id', auth()->id())->orderBy('id', 'desc')->first();
+  return $v->avatar;
 }

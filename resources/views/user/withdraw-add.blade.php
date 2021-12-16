@@ -70,7 +70,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-3 fv-row">
-                        <input type="number" min="1" name="amount" class="form-control form-control-lg form-control-solid" placeholder="" value="" required/>
+                        <input type="number" min="1" name="amount" class="form-control" placeholder="" value="" required/>
                     </div>
                     <!--end::Col-->
                 </div>

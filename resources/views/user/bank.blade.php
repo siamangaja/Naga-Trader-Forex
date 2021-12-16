@@ -73,7 +73,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <select class="form-control form-control-lg form-control-solid" id="bank" name="bank" required>
+                        <select class="form-control" id="bank" name="bank" required>
                             @if ($d != null)
                                 <option value="BCA" {{ $d->bank == 'BCA' ? 'selected' : '' }}>BCA</option>
                                 <option value="Mandiri" {{ $d->bank == 'Mandiri' ? 'selected' : '' }}>Mandiri</option>
@@ -102,9 +102,9 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         @if ($d != null)
-                            <input type="text" name="number" class="form-control form-control-lg form-control-solid" value="{{ $d->number }}" required/>
+                            <input type="text" name="number" class="form-control" value="{{ $d->number }}" required/>
                         @else
-                            <input type="text" name="number" class="form-control form-control-lg form-control-solid" required/>
+                            <input type="text" name="number" class="form-control" required/>
                         @endif
                     </div>
                     <!--end::Col-->
@@ -119,9 +119,9 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         @if ($d != null)
-                            <input type="text" name="account_name" class="form-control form-control-lg form-control-solid" value="{{ $d->account_name }}" required />
+                            <input type="text" name="account_name" class="form-control" value="{{ $d->account_name }}" required />
                         @else
-                            <input type="text" name="account_name" class="form-control form-control-lg form-control-solid" required />
+                            <input type="text" name="account_name" class="form-control" required />
                         @endif
                     </div>
                     <!--end::Col-->

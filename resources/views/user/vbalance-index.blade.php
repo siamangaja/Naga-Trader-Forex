@@ -32,7 +32,7 @@
             </span>
             <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
                 <div class="mb-3 mb-md-0 fw-bold">
-                    <h4 class="text-gray-900 fw-bolder">Virtual Balance: USD {{ $balance }}</h4>
+                    <h4 class="text-gray-900 fw-bolder">Virtual Balance: ${{ $balance }}</h4>
                 </div>
             </div>
         </div>
@@ -68,8 +68,8 @@
                                 @endif
                             </td>
                             <td>{{ $d->notes }}</td>
-                            <td>{{ $d->amount }}</td>
-                            <td>{{ $d->balance }}</td>
+                            <td>${{ $d->amount }}</td>
+                            <td>${{ $d->balance }}</td>
                         </tr>
                         @empty
                         <tr>
@@ -101,4 +101,11 @@
 <!--end::Container-->
 </div>
 <!--end::Post-->
+
+<style>
+    .hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+        display: none !important;
+    }
+</style>
+
 @stop

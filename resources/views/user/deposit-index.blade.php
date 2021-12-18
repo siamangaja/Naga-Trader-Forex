@@ -52,7 +52,7 @@
                             <td><a href="{{url('user/deposit', $d->ref)}}">{{ $d->ref }}</a></td>
                             <td>{{ $d->created_at }}</td>
                             <td>{{ $d->bank_name }}<br>{{ $d->bank_number }}<br>{{ $d->bank_account }}</td>
-                            <td>{{ $d->total }}</td>
+                            <td>${{ $d->total }}</td>
                             <td>
                                 @if ($d->status == 0)
                                     <span class="badge badge-light-warning fw-bolder px-4 py-3">Diverifikasi</span>
@@ -93,4 +93,11 @@
 <!--end::Container-->
 </div>
 <!--end::Post-->
+
+<style>
+    .hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+        display: none !important;
+    }
+</style>
+
 @stop

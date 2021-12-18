@@ -38,7 +38,7 @@
             <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
                 <!--begin::Content-->
                 <div class="mb-3 mb-md-0 fw-bold">
-                    <h4 class="text-gray-900 fw-bolder">Balance: USD {{ number_format($balance, 0) }}</h4>
+                    <h4 class="text-gray-900 fw-bolder">Balance: ${{ number_format($balance, 0) }}</h4>
                 </div>
                 <!--end::Content-->
                 <!--begin::Action-->
@@ -112,4 +112,11 @@
 <!--end::Container-->
 </div>
 <!--end::Post-->
+
+<style>
+    .hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+        display: none !important;
+    }
+</style>
+
 @stop

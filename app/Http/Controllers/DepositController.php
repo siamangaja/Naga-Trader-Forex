@@ -399,58 +399,7 @@ class DepositController extends Controller
         return redirect ('user/transactions');
     }
 
-    public function CheckPrice (Request $request) {
-        $count = Transactions::where([
-            ['status', 0],
-            ['rate_end', NULL],
-            ['market', $request->market],
-        ])->count();
-
-        $trxs = Transactions::where([
-            ['status', 0],
-            ['rate_end', NULL],
-            ['market', $request->market],
-        ])->get();
-
-        $url = "https://www.bitstamp.net/api/v2/ticker/".$request->market;
-        $API_data = json_decode(file_get_contents($url), true);
-        $lastprice = $API_data['last'];
-
-        if ($count == 0) {
-            return 'No transactions found...';
-        }
-
-        foreach ($trxs as $trx) {
-                $current = Carbon::now()->toDateTimeString();
-                $newdate = $trx->date_end;
-        }
-
-        if ($current > $newdate) {
-
-            $update = Transactions::where('id', $trx->id)
-                ->update(['rate_end' => $lastprice]);
-
-                //dd($lastprice.' | '.$trx->rate_stake);
-
-            if ($lastprice > $trx->rate_stake) {
-                $update = Transactions::where('id', $trx->id)
-                    ->update([
-                    'status'    => 1,
-                    'win_lose'  => $trx->amount*18000,
-                ]);
-            } else {
-                $update = Transactions::where('id', $trx->id)
-                    ->update([
-                    'status'    => 2,
-                    'win_lose'  => $trx->amount,
-                ]);
-            }
-            return 'Transactions updated...';
-        }
-
-    }
-
-    public function Coba (Request $request) {
+    public function Order (Request $request) {
         switch($request->buttonSubmit) {
             case 'buy': 
                 $market = $request->market;
@@ -472,11 +421,70 @@ class DepositController extends Controller
                 $NewOrder->status       = 0;
                 $NewOrder->win_lose     = 0;
                 $NewOrder->save();
+
+                // Kurangi balance user:
+                $databalance = VirtualBalance::orderBy('id', 'desc')->where('user_id', auth()->id())->take(1)->get();
+
+                if ($databalance) {
+                    $balance = 0;
+                }
+
+                foreach($databalance as $b) {
+                    $balance = $b->balance;
+                }
+
+                $vBalance = new VirtualBalance;
+                $vBalance->user_id  = auth()->id();
+                $vBalance->type     = 'debet';
+                $vBalance->amount   = $amount;
+                $vBalance->balance  = $balance-$vBalance->amount;
+                $vBalance->notes    = 'Order #'.$NewOrder->trx_id;
+                $vBalance->save();
+
                 return redirect ('user');
             break;
 
             case 'sell': 
-                return 'sell';
+                $market = $request->market;
+                $time = $request->time;
+                $amount = $request->amount;
+                $url = "https://www.bitstamp.net/api/v2/ticker/".$market;
+                $API_data = json_decode(file_get_contents($url), true);
+                $price = $API_data['last'];
+                $NewOrder = new Transactions;
+                $NewOrder->user_id      = auth()->id();
+                $NewOrder->trx_id       = strtoupper(substr(md5(microtime()), 0, 12));
+                $NewOrder->market       = $market;
+                $NewOrder->amount       = $amount;
+                $NewOrder->type         = 'sell '.$time.' seconds';
+                $NewOrder->date_start   = Carbon::now();
+                $NewOrder->date_end     = Carbon::now()->addSeconds($time);
+                $NewOrder->rate_stake   = $price;
+                $NewOrder->rate_end     = NULL;
+                $NewOrder->status       = 0;
+                $NewOrder->win_lose     = 0;
+                $NewOrder->save();
+
+                // Kurangi balance user:
+                $databalance = VirtualBalance::orderBy('id', 'desc')->where('user_id', auth()->id())->take(1)->get();
+
+                if ($databalance) {
+                    $balance = 0;
+                }
+
+                foreach($databalance as $b) {
+                    $balance = $b->balance;
+                }
+
+                $vBalance = new VirtualBalance;
+                $vBalance->user_id  = auth()->id();
+                $vBalance->type     = 'debet';
+                $vBalance->amount   = $amount;
+                $vBalance->balance  = $balance-$vBalance->amount;
+                $vBalance->notes    = 'Order #'.$NewOrder->trx_id;
+                $vBalance->save();
+
+                return redirect ('user');
             break;
         }
     }

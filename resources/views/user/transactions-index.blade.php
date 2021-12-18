@@ -13,6 +13,7 @@
 
         <!--begin::Card body-->
         <div class="card-body pt-0">
+
             <br>
 
             @if (session('error'))
@@ -27,13 +28,14 @@
             @endif
 
             <table>
-                <form id="" class="form" action="{{url('user/coba')}}" method="POST">
+                <form id="" class="form" action="{{route('order')}}" method="POST">
                 @csrf
                 <select id="market" name="market" class="form-control" required="required">
                     <option value="btcusd" selected="selected">BTC / USD</option>
                 </select>
 
                 <br>
+
                 <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container">
                   <div id="tradingview_04a74"></div>
@@ -60,7 +62,7 @@
                 <br>
 
                 <th class="min-w-10px">
-                    <input type="number" id="amount" name="amount" class="form-control" placeholder="USD 1" value="" required/>
+                    <input type="number" id="amount" name="amount" class="form-control" placeholder="$1" value="" required/>
                 </th>
                 <th class="min-w-10px">
                     <select id="time" name="time" class="form-control" required="required">
@@ -73,8 +75,6 @@
                         <option value="3600">1 Hour</option>
                     </select>
                 </th>
-                <!-- <th class="min-w-50px"><a href="{{url('user/trx/buy/btcusd/30/1')}}" class="btn btn-success">BUY 180%</a></th>
-                <th class="min-w-50px"><a href="{{url('user/trx/sell/btcusd/30/1')}}" class="btn btn-danger">SELL 180%</a></th> -->
                 <th class="min-w-50px"><button type="submit" class="btn btn-success" id="buy" name="buttonSubmit" value="buy">BUY 180%</button></th>
                 <th class="min-w-50px"><button type="submit" class="btn btn-danger" id="sell" name="buttonSubmit" value="sell">SELL 180%</button></th>
                 </form>
@@ -107,11 +107,41 @@
                             <td>{{ $d->trx_id }}</td>
                             <td>{{ strtoupper($d->market) }}</td>
                             <td>
-                                <span class="badge badge-success fw-bolder px-4 py-3">{{ strtoupper($d->type) }}</span>
+                                @if ($d->type == 'buy 30 seconds')
+                                    <span class="badge badge-success fw-bolder px-4 py-3">{{ strtoupper('buy 30 seconds') }}</span>
+                                @elseif ($d->type == 'buy 60 seconds')
+                                    <span class="badge badge-success fw-bolder px-4 py-3">{{ strtoupper('buy 1 minute') }}</span>
+                                @elseif ($d->type == 'buy 180 seconds')
+                                    <span class="badge badge-success fw-bolder px-4 py-3">{{ strtoupper('buy 3 minutes') }}</span>
+                                @elseif ($d->type == 'buy 300 seconds')
+                                    <span class="badge badge-success fw-bolder px-4 py-3">{{ strtoupper('buy 5 minutes') }}</span>
+                                @elseif ($d->type == 'buy 1800 seconds')
+                                    <span class="badge badge-success fw-bolder px-4 py-3">{{ strtoupper('buy 30 minutes') }}</span>
+                                @elseif ($d->type == 'buy 3600 seconds')
+                                    <span class="badge badge-success fw-bolder px-4 py-3">{{ strtoupper('buy 1 hour') }}</span>
+                                @elseif ($d->type == 'sell 30 seconds')
+                                    <span class="badge badge-danger fw-bolder px-4 py-3">{{ strtoupper('sell 30 seconds') }}</span>
+                                @elseif ($d->type == 'sell 60 seconds')
+                                    <span class="badge badge-danger fw-bolder px-4 py-3">{{ strtoupper('sell 1 minute') }}</span>
+                                @elseif ($d->type == 'sell 180 seconds')
+                                    <span class="badge badge-danger fw-bolder px-4 py-3">{{ strtoupper('sell 3 minutes') }}</span>
+                                @elseif ($d->type == 'sell 300 seconds')
+                                    <span class="badge badge-danger fw-bolder px-4 py-3">{{ strtoupper('sell 5 minutes') }}</span>
+                                @elseif ($d->type == 'sell 1800 seconds')
+                                    <span class="badge badge-danger fw-bolder px-4 py-3">{{ strtoupper('sell 30 minutes') }}</span>
+                                @elseif ($d->type == 'sell 3600 seconds')
+                                    <span class="badge badge-danger fw-bolder px-4 py-3">{{ strtoupper('sell 1 hour') }}</span>
+                                @endif
                             </td>
                             <td>{{ $d->rate_stake }}</td>
-                            <td>USD {{ $d->amount }}</td>
-                            <td>{{ $d->rate_end }}</td>
+                            <td>${{ $d->amount }}</td>
+                            <td>
+                                @if ($d->rate_end == '')
+                                    -
+                                @else
+                                    {{ $d->rate_end }}
+                                @endif
+                            </td>
                             <td>
                                 @if ($d->status == 0)
                                     <span class="badge badge-warning fw-bolder px-4 py-3">WAIT</span>
@@ -152,4 +182,11 @@
 <!--end::Container-->
 </div>
 <!--end::Post-->
+
+<style>
+    .hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+        display: none !important;
+    }
+</style>
+
 @stop

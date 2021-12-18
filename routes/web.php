@@ -7,8 +7,9 @@ use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DepositController;
+use App\Http\Controllers\CronController;
 
-Route::get('/indodax', [PagesController::class,'Indodax'])->name('Indodax');
+//Route::get('/indodax', [PagesController::class,'Indodax'])->name('Indodax');
 Route::get('/', [PagesController::class,'frontpage'])->name('frontpage');
 
 Route::get('/admin/login', [AdminAuthController::class,'getLogin'])->name('login-admin');
@@ -93,9 +94,9 @@ Route::group(['middleware' => ['auth:user']], function () {
     Route::get('/user/virtual-balance', [DepositController::class,'VirtualBalanceUser'])->name('user.virtual-balance');
     //Route::get('/user/transactions', [DepositController::class,'TransactionsIndex'])->name('user.transactions-index');
     //Route::get('/user/order/{amount}', [DepositController::class,'Order'])->name('user.order');
-    Route::post('/user/coba', [DepositController::class,'Coba']);
+    Route::post('/user/order', [DepositController::class,'Order'])->name('order');
     Route::get('/user/trx/buy/{market}/{time}/{amount}', [DepositController::class,'Buy']);
-    Route::get('/user/trx/check/{market}', [DepositController::class,'CheckPrice']);
+    Route::get('/user/trx/check/{market}', [CronController::class,'CheckPrice']);
 });
 
 Route::get('/login', [UserLoginController::class,'showLoginForm'])->name('login');

@@ -110,7 +110,8 @@ class DepositController extends Controller
         $imageName1 = time().'-'.$file->getClientOriginalName();
         $imageName2 = Str::lower($imageName1);
         $imageName3 = preg_replace('/\s+/', '', $imageName2);
-        $img = $request->image->move(public_path('storage/images'), $imageName3);
+        //$img = $request->image->move(public_path('storage/images'), $imageName3);
+        $img = $request->image->move('laravel/storage/app/public/images', $imageName3);
   
         $update = User::where('id', auth()->id())
             ->update([

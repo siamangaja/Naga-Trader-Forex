@@ -52,9 +52,29 @@
                             <td>{{ strtoupper($d->market) }}</td>
                             <td>
                                 @if ($d->type == 'buy 30 seconds')
-                                    <span class="badge badge-light-success fw-bolder px-4 py-3">Buy</span>
+                                    <span class="badge badge-success fw-bolder px-4 py-3">{{ strtoupper('buy 30 seconds') }}</span>
                                 @elseif ($d->type == 'buy 60 seconds')
-                                   <span class="badge badge-light-danger fw-bolder px-4 py-3">Sell</span>
+                                    <span class="badge badge-success fw-bolder px-4 py-3">{{ strtoupper('buy 1 minute') }}</span>
+                                @elseif ($d->type == 'buy 180 seconds')
+                                    <span class="badge badge-success fw-bolder px-4 py-3">{{ strtoupper('buy 3 minutes') }}</span>
+                                @elseif ($d->type == 'buy 300 seconds')
+                                    <span class="badge badge-success fw-bolder px-4 py-3">{{ strtoupper('buy 5 minutes') }}</span>
+                                @elseif ($d->type == 'buy 1800 seconds')
+                                    <span class="badge badge-success fw-bolder px-4 py-3">{{ strtoupper('buy 30 minutes') }}</span>
+                                @elseif ($d->type == 'buy 3600 seconds')
+                                    <span class="badge badge-success fw-bolder px-4 py-3">{{ strtoupper('buy 1 hour') }}</span>
+                                @elseif ($d->type == 'sell 30 seconds')
+                                    <span class="badge badge-danger fw-bolder px-4 py-3">{{ strtoupper('sell 30 seconds') }}</span>
+                                @elseif ($d->type == 'sell 60 seconds')
+                                    <span class="badge badge-danger fw-bolder px-4 py-3">{{ strtoupper('sell 1 minute') }}</span>
+                                @elseif ($d->type == 'sell 180 seconds')
+                                    <span class="badge badge-danger fw-bolder px-4 py-3">{{ strtoupper('sell 3 minutes') }}</span>
+                                @elseif ($d->type == 'sell 300 seconds')
+                                    <span class="badge badge-danger fw-bolder px-4 py-3">{{ strtoupper('sell 5 minutes') }}</span>
+                                @elseif ($d->type == 'sell 1800 seconds')
+                                    <span class="badge badge-danger fw-bolder px-4 py-3">{{ strtoupper('sell 30 minutes') }}</span>
+                                @elseif ($d->type == 'sell 3600 seconds')
+                                    <span class="badge badge-danger fw-bolder px-4 py-3">{{ strtoupper('sell 1 hour') }}</span>
                                 @endif
                             </td>
                             <td>{{ $d->rate_stake }}</td>
@@ -62,11 +82,11 @@
                             <td>{{ $d->rate_end }}</td>
                             <td>
                                 @if ($d->status == 0)
-                                    <span class="badge badge-light-warning fw-bolder px-4 py-3">Pending</span>
+                                    <span class="badge badge-light-warning fw-bolder px-4 py-3">WAIT</span>
                                 @elseif ($d->status == 1)
-                                   <span class="badge badge-light-success fw-bolder px-4 py-3">Success</span>
+                                   <span class="badge badge-light-success fw-bolder px-4 py-3">WIN</span>
                                 @elseif ($d->status == 2)
-                                   <span class="badge badge-light-danger fw-bolder px-4 py-3">Failed</span>
+                                   <span class="badge badge-light-danger fw-bolder px-4 py-3">LOSE</span>
                                 @endif
                             </td>
                         </tr>
@@ -100,4 +120,11 @@
 <!--end::Container-->
 </div>
 <!--end::Post-->
+
+<style>
+    .hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+        display: none !important;
+    }
+</style>
+
 @stop

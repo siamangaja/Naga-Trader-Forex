@@ -139,10 +139,13 @@
                                 <!--end::Page title-->
 
                                 <div class="d-flex align-items-center">
-                                    <h5>Balance: ${{getBalance()}} (Demo)</h5>&nbsp;
-                                    <div class="d-flex">
-                                        <a href="{{ route('user.profile') }}"><img src="storage/images/{{ getAvatar() }}" width="30" style="border-radius: 200px;"></a>
-                                    </div>
+                                    @if (Auth::guard('admin')->check())
+                                    @else
+                                        <h5>Balance: ${{getBalance()}} (Demo)</h5>&nbsp;
+                                        <div class="d-flex">
+                                            <a href="{{ route('user.profile') }}"><img src="storage/images/{{ getAvatar() }}" width="30" style="border-radius: 200px;"></a>
+                                        </div>
+                                    @endif
                                 </div>
 
                             </div>

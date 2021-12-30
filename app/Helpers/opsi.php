@@ -28,3 +28,8 @@ function getAvatar () {
   $v = DB::table('users')->where('id', auth()->id())->orderBy('id', 'desc')->first();
   return $v->avatar;
 }
+
+function getName () {
+  $d = DB::table('users')->where('id', auth()->id())->orderBy('id', 'desc')->first();
+  return $d->name;
+}

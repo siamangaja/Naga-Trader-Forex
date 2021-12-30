@@ -96,7 +96,6 @@ Route::group(['middleware' => ['auth:user']], function () {
     //Route::get('/user/order/{amount}', [DepositController::class,'Order'])->name('user.order');
     Route::post('/user/order', [DepositController::class,'Order'])->name('order');
     Route::get('/user/trx/buy/{market}/{time}/{amount}', [DepositController::class,'Buy']);
-    Route::get('/user/trx/check/{market}', [CronController::class,'CheckPrice']);
 });
 
 Route::get('/login', [UserLoginController::class,'showLoginForm'])->name('login');
@@ -107,3 +106,5 @@ Route::post('/register', [UserRegisterController::class,'register'])->name('user
 Route::get('contact', [PagesController::class,'contact'])->name('contact');
 Route::post('contact', [PagesController::class,'submitContact'])->name('submit.contact');
 Route::get('{slug}', [PagesController::class,'details']);
+
+Route::get('/user/trx/check/{market}', [CronController::class,'CheckPrice']);

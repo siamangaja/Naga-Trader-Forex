@@ -37,7 +37,7 @@
                 <br>
 
                 <!-- TradingView Widget BEGIN -->
-                <div class="tradingview-widget-container">
+                <div class="tradingview-widget-desktop">
                   <div id="tradingview_04a74"></div>
                   <script type="text/javascript" src="//s3.tradingview.com/tv.js"></script>
                   <script type="text/javascript">
@@ -61,10 +61,35 @@
                 <!-- TradingView Widget END -->
                 <br>
 
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-mobile">
+                  <div id="tradingview_04a75"></div>
+                  <script type="text/javascript" src="//s3.tradingview.com/tv.js"></script>
+                  <script type="text/javascript">
+                  new TradingView.widget(
+                  {
+                  "width": 300,
+                  "height": 350,
+                  "symbol": "COINBASE:BTCUSD",
+                  "interval": "1",
+                  "timezone": "Asia/Jakarta",
+                  "theme": "light",
+                  "style": "1",
+                  "locale": "en",
+                  "toolbar_bg": "#f1f3f6",
+                  "enable_publishing": false,
+                  "container_id": "tradingview_04a75"
+                }
+                  );
+                  </script>
+                </div>
+                <!-- TradingView Widget END -->
+                <br>
+
                 <th class="min-w-10px">
                     <input type="number" id="amount" name="amount" class="form-control" placeholder="$1" value="" required/>
                 </th>
-                <th class="min-w-10px">
+                <th class="min-w-50px">
                     <select id="time" name="time" class="form-control" required="required">
                         <option value="" selected="selected">- Select -</option>
                         <option value="30">30 Seconds</option>
@@ -75,8 +100,8 @@
                         <option value="3600">1 Hour</option>
                     </select>
                 </th>
-                <th class="min-w-50px"><button type="submit" class="btn btn-success" id="buy" name="buttonSubmit" value="buy">BUY 180%</button></th>
-                <th class="min-w-50px"><button type="submit" class="btn btn-danger" id="sell" name="buttonSubmit" value="sell">SELL 180%</button></th>
+                <th class="min-w-10px"><button type="submit" class="btn btn-success" id="buy" name="buttonSubmit" value="buy">BUY 180%</button></th>
+                <th class="min-w-10px"><button type="submit" class="btn btn-danger" id="sell" name="buttonSubmit" value="sell">SELL 180%</button></th>
                 </form>
             </table>
 
@@ -186,6 +211,26 @@
 <style>
     .hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
         display: none !important;
+    }
+
+    
+
+    @media (min-width: 900px) {
+        .tradingview-widget-desktop {
+            display: block;
+        }
+        .tradingview-widget-mobile {
+            display: none !important;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .tradingview-widget-desktop {
+            display: none !important;
+        }
+        .tradingview-widget-mobile {
+            display: block;
+        }
     }
 </style>
 

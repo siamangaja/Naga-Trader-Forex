@@ -141,9 +141,9 @@
                                 <div class="d-flex align-items-center">
                                     @if (Auth::guard('admin')->check())
                                     @else
-                                        <h5>Balance: ${{getBalance()}} (Demo)</h5>&nbsp;&nbsp;
+                                        <h5>Balance: ${{getBalance()}} <span style="color: #009ef7">(Live)</span></h5>&nbsp;&nbsp;
                                         <div class="d-flex">
-                                            <a href="{{ route('user.profile') }}"><img src="storage/images/{{ getAvatar() }}" width="30" style="border-radius: 200px;" alt='{{ getName() }}' title='{{ getName() }}'> {{ getName() }}</a>
+                                            <a href="{{ route('user.profile') }}" style="color: #111"><img src="storage/images/{{ getAvatar() }}" width="30" style="border-radius: 200px;" alt='{{ getName() }}' title='{{ getName() }}'> {{ getName() }}</a>
                                         </div>
                                     @endif
                                 </div>

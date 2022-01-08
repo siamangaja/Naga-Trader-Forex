@@ -602,8 +602,6 @@ class AdminController extends Controller
         ]);
     }
 
-
-
     public function BalanceManagerIndex() {
         $title = 'Balance Manager';
         $data = VirtualBalance::latest('user_id')->groupBy('user_id')->orderBy('id', 'DESC')->paginate(20);

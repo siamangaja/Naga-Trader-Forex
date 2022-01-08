@@ -68,6 +68,10 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/virtual-balance', [AdminController::class,'IndexVirtualBalance'])->name('admin.virtualbalance');
     Route::get('/admin/virtual-balance/{id}/delete', [AdminController::class,'DeleteVirtualBalance']);
     Route::get('/admin/transactions', [AdminController::class,'IndexTransactions'])->name('admin.transactions');
+
+    Route::get('/admin/balance-manager', [AdminController::class,'BalanceManagerIndex'])->name('admin.balancemanager');
+    Route::get('/admin/balance-manager/{id}/edit', [AdminController::class,'BalanceManagerEdit']);
+    Route::post('/admin/balance-manager', [AdminController::class,'BalanceManagerUpdate'])->name('balance.update');
 });
 
 // User

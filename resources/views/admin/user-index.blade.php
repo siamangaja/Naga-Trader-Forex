@@ -141,6 +141,13 @@
 <!--end::Container-->
 </div>
 <!--end::Post-->
+
+<style>
+    .hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+        display: none !important;
+    }
+</style>
+
 @stop
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  

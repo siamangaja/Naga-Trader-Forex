@@ -602,4 +602,32 @@ class AdminController extends Controller
         ]);
     }
 
+
+
+    public function BalanceManagerIndex() {
+        $title = 'Balance Manager';
+        $data = VirtualBalance::latest('user_id')->groupBy('user_id')->orderBy('id', 'DESC')->paginate(20);
+        return view('admin.balance-manager', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function BalanceManagerEdit ($id)
+    {
+        $VirtualBalance = VirtualBalance::find($id);
+        return response()->json([
+          'data' => $VirtualBalance,
+        ]);
+    }
+
+    public function BalanceManagerUpdate (Request $request)
+    {
+        $update = VirtualBalance::where('id',$request->id)
+            ->update([
+                'balance' => $request->balance,
+            ]);
+        return redirect ('admin/balance-manager')->with("success","Data updated successfully...");
+    }
+
 }

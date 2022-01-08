@@ -68,7 +68,7 @@
                             <td>{{ $d->balance }}</td>
                             <td>{{ $d->notes }}</td>
                             <td>
-                                <a href="admin/virtual-balance/{{$d->id}}/delete" onclick="return confirm('Yakin untuk menghapus data ini?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>
+                                <a href="#" id="EditBalance" data-bs-toggle="modal" data-bs-target='#ModalForm' data-id="{{ $d->id }}"><span class="btn btn-dark btn-sm"><i class="fa fa-file"></i> Edit</span></a>
                             </td>
                         </tr>
                         @empty
@@ -92,6 +92,31 @@
         </div>
         <!--end::Card body-->
 
+
+        <!--begin::Modal-->
+        <div class="modal fade" id="ModalForm" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered mw-650px">
+                <div class="modal-content">
+                    <div class="modal-body py-10 px-lg-17">
+                    <form class="form" method="POST" action="{{route('balance.update')}}">
+                    @csrf
+                    <div class="m-header" id="kt_modal_add_customer_header">
+                        <h2 class="fw-bolder">Edit Balance</h2>
+                    </div>
+                    <input type="text" class="form-control" id="id" name="id" placeholder="" value="{{$d->id}}" readonly style="display:none;">
+
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">Balance (USD)</label>
+                    <input type="text" class="form-control" id="balance" name="balance" placeholder="" value="{{$d->balance}}">
+
+                    <br><button type="submit" class="btn btn-success">Submit</button>
+
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end::Modal-->
+
     </div>
     <!--end::Content-->
 </div>
@@ -109,3 +134,50 @@
 </style>
 
 @stop
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="//unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+
+$(document).ready(function () {
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+$('body').on('click', '#submit', function (event) {
+    event.preventDefault()
+    var id = $("#id").val();
+    var balance = $("#balance").val();
+   
+    $.ajax({
+      url: 'admin/balance-manager',
+      type: "POST",
+      data: {
+        id: id,
+        balance: balance,
+      },
+      dataType: 'json',
+      success: function (data) {
+          $('#ModalForm').modal('hide');
+          window.location.reload(true);
+      }
+  });
+});
+
+$('body').on('click', '#EditBalance', function (event) {
+
+    event.preventDefault();
+    var id = $(this).data('id');
+    console.log(id)
+    $.get('admin/balance-manager/' + id + '/edit', function (data) {
+         $('#ModalForm').modal('show');
+         $('#id').val(data.data.id);
+         $('#balance').val(data.data.balance);
+     })
+});
+
+}); 
+</script>

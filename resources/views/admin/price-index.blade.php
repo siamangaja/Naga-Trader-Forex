@@ -105,4 +105,11 @@
 <!--end::Container-->
 </div>
 <!--end::Post-->
+
+<style>
+    .hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+        display: none !important;
+    }
+</style>
+
 @stop

@@ -71,6 +71,9 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/balance-manager', [AdminController::class,'BalanceManagerIndex'])->name('admin.balancemanager');
     Route::get('/admin/balance-manager/{id}/edit', [AdminController::class,'BalanceManagerEdit']);
     Route::post('/admin/balance-manager', [AdminController::class,'BalanceManagerUpdate'])->name('balance.update');
+    Route::get('/admin/bank', [AdminController::class,'bankIndex'])->name('bank.index');
+    Route::get('/admin/bank/{id}/edit', [AdminController::class,'bankEdit']);
+    Route::post('/admin/bank', [AdminController::class,'bankUpdate'])->name('bank.update');
 });
 
 // User

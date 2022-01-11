@@ -22,6 +22,7 @@ use App\Models\Wallet;
 use App\Models\Withdraw;
 use App\Models\VirtualBalance;
 use App\Models\Transactions;
+use App\Models\BankAdmin;
 
 class AdminController extends Controller
 {
@@ -626,6 +627,35 @@ class AdminController extends Controller
                 'balance' => $request->balance,
             ]);
         return redirect ('admin/balance-manager')->with("success","Data updated successfully...");
+    }
+
+    public function bankIndex () {
+        $title = 'Bank Account';
+        $data = BankAdmin::orderBy('id', 'desc')->paginate(20);
+        return view('admin.bank-index', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function bankEdit ($id)
+    {
+        $BankAdmin = BankAdmin::find($id);
+        return response()->json([
+          'data' => $BankAdmin,
+        ]);
+    }
+
+    public function bankUpdate (Request $request)
+    {
+        $update = BankAdmin::where('id',$request->id)
+            ->update([
+                'bank'          => $request->bank,
+                'number'        => $request->number,
+                'account_name'  => $request->account_name,
+                'status'        => $request->status,
+            ]);
+        return redirect ('admin/bank')->with("success","Data updated successfully...");
     }
 
 }

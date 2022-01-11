@@ -46,10 +46,10 @@ class UserRegisterController extends Controller
 
       // Tambahkan Virtual Balance
       $vBalance = new VirtualBalance();
-      $vBalance->user_id  = $user->id; //auth()->id();
+      $vBalance->user_id  = $user->id;
       $vBalance->type     = 'credit';
-      $vBalance->amount   = 10000;
-      $vBalance->balance  = 10000;
+      $vBalance->amount   = 0;
+      $vBalance->balance  = 0;
       $vBalance->notes    = 'Free Register Balance';
       $vBalance->save();
 
@@ -81,7 +81,7 @@ class UserRegisterController extends Controller
         return redirect()->route('login');
       }
 
-      //Update status user
+      // Update status user
       $update = User::where('id', $user->id)
       ->update([
         'status'  => 1,

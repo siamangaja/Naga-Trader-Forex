@@ -69,24 +69,17 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">Nama Bank</label>
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">
+                        <span class="required">Nama Bank</span>
+                    </label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <select class="form-control" id="bank" name="bank" required>
-                            @if ($d != null)
-                                <option value="BCA" {{ $d->bank == 'BCA' ? 'selected' : '' }}>BCA</option>
-                                <option value="Mandiri" {{ $d->bank == 'Mandiri' ? 'selected' : '' }}>Mandiri</option>
-                                <option value="BNI" {{ $d->bank == 'BNI' ? 'selected' : '' }}>BNI</option>
-                                <option value="BRI" {{ $d->bank == 'BRI' ? 'selected' : '' }}>BRI</option>
-                            @else
-                                <option value="" selected disabled>-Pilih Bank-</option>
-                                <option value="BCA">BCA</option>
-                                <option value="Mandiri">Mandiri</option>
-                                <option value="BNI">BNI</option>
-                                <option value="BRI">BRI</option>
-                            @endif
-                        </select>
+                        @if ($d != null)
+                            <input type="text" name="bank" class="form-control" value="{{ $d->bank }}" required/>
+                        @else
+                            <input type="text" name="bank" class="form-control" placeholder="Contoh: BCA" required/>
+                        @endif
                     </div>
                     <!--end::Col-->
                 </div>
